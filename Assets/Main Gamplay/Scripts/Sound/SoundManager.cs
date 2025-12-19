@@ -19,8 +19,7 @@ public class SoundManager : MonoBehaviour {
     *  Music manager can be accessed via: MusicManager.Intance
     */
     public static SoundManager Instance { get; private set;}
-    void Awake()
-    {
+    void Awake() {
         if (Instance != null && Instance != this) {
             Destroy(gameObject);
         } else {

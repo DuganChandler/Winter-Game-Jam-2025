@@ -605,7 +605,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6961d817adbb92429a2dedd15f90aa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MusicLibrary
-  tracks: []
+  tracks:
+  - trackName: test
+    clip: {fileID: 8300000, guid: 075b297e802532f4580fe1fb6078bad5, type: 3}
 --- !u!4 &1703739522
 Transform:
   m_ObjectHideFlags: 0
