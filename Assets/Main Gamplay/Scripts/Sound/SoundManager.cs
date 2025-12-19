@@ -42,7 +42,6 @@ public class SoundManager : MonoBehaviour {
         musicSource.clip = nextTrack;
         musicSource.Play();
     }
-
  
     IEnumerator AnimateMusicCrossfade(AudioClip nextTrack, float fadeDuration = 0.5f) {
         float percent = 0;
