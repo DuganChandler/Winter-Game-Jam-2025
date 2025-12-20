@@ -41,22 +41,28 @@ public class Player : Entity
     {
         if (context.performed)
         {
-            Debug.Log("Activate Selfie Mode");
             ActivateSelfieMode();
         }
         else if (context.canceled)
         {
-            Debug.Log("Deactivate Selfie Mode");
             DeactivateSelfieMode();
         }
     }
     #endregion
+    private float priorSpeed;
     private void ActivateSelfieMode()
     {
         OnActivateSelfieMode.Invoke();
+        m_playerMovement.IsRotating = false;
+        m_playerMovement.DodgeEnabled = false;
+        priorSpeed = m_playerMovement.TopMoveSpeed;
+        m_playerMovement.TopMoveSpeed = 2f;
     }
     private void DeactivateSelfieMode()
     {
         OnDeactivateSelfieMode.Invoke();
+        m_playerMovement.IsRotating = true;
+        m_playerMovement.DodgeEnabled = true;
+        m_playerMovement.TopMoveSpeed = priorSpeed;
     }
 }

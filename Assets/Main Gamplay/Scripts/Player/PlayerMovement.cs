@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement Parameters")]
     [SerializeField, Range(1f,10f)]
     private float m_topMoveSpeed = 5f;
+    public float TopMoveSpeed { get { return m_topMoveSpeed; } set { m_topMoveSpeed = value; } }
 
     [SerializeField, Range(1f, 10f)]
     private float m_rotationSpeed = 5f;
@@ -31,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
 
     // Bools
     private bool _isMoving;
+    public bool IsRotating = true;
+    public bool DodgeEnabled = true;
 
     // Storage
     private Vector3 _moveVelocity;
@@ -73,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 _moveInput = moveAction.ReadValue<Vector2>();
         _isMoving = _moveInput != Vector2.zero;
         Vector3 targetVelocity = new Vector3(_moveInput.x * m_topMoveSpeed, m_rb.linearVelocity.y, _moveInput.y * m_topMoveSpeed);
-        m_rb.linearVelocity = targetVelocity;
+        m_rb.linearVelocity = Vector3.SmoothDamp(m_rb.linearVelocity, targetVelocity, ref velocity, 0.2f);
 
         if (_isMoving)
         {
@@ -83,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void OnDodge(InputAction.CallbackContext context)
     {
+        if (!DodgeEnabled) return;
         if (!context.performed) return;
         if (Time.time < _dodgeTimer) return;
         int predicate = m_backstep_when_stationary && !_isMoving ? -1 : 1;
@@ -93,6 +97,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Rotate()
     {
+        if (!IsRotating) return;
         Quaternion targetRotation = Quaternion.LookRotation(_facingDirection);
         targetRotation = Quaternion.RotateTowards(
             transform.rotation,
