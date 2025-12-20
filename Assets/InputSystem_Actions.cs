@@ -624,6 +624,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""2a83270f-e5e9-42fc-be3d-46c1dcf6eea8"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Dodge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""115cedaa-8c39-43a0-866f-4dddfcff759e"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",

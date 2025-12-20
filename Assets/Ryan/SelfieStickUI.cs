@@ -1,13 +1,14 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Animator))]
 public class SelfieStickUI : MonoBehaviour
 {
     private Animator m_animator;
+    [SerializeField] private Image m_meterFill;
     private void Awake()
     {
         Setup();
-        
     }
     private void Setup()
     {
@@ -17,6 +18,7 @@ public class SelfieStickUI : MonoBehaviour
         // Event Related
         Player.OnActivateSelfieMode += ShowSelfieUI;
         Player.OnDeactivateSelfieMode += HideSelfieUI;
+        SelfieStick.OnTargetVisible += SetMeterLength;
     }
 
     private void OnDestroy()
@@ -24,6 +26,7 @@ public class SelfieStickUI : MonoBehaviour
         // Event Related
         Player.OnActivateSelfieMode -= ShowSelfieUI;
         Player.OnDeactivateSelfieMode -= HideSelfieUI;
+        SelfieStick.OnTargetVisible -= SetMeterLength;
     }
 
     private void ShowSelfieUI()
@@ -34,5 +37,9 @@ public class SelfieStickUI : MonoBehaviour
     private void HideSelfieUI()
     {
         m_animator.Play("hide");
+    }
+    private void SetMeterLength(float percentage)
+    {
+        if (m_meterFill != null) m_meterFill.transform.localPosition = Vector2.right * -582.9f * (1 - percentage); 
     }
 }

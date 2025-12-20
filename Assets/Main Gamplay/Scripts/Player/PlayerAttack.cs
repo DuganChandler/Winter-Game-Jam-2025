@@ -22,6 +22,19 @@ public class PlayerAttack : MonoBehaviour
     private float _attackCompletionTime;
     private InputAction attack;
 
+    [SerializeField] private bool _canAttack;
+    public bool CanAttack
+    {
+        get 
+        { 
+            return _canAttack && Time.time >= _attackCompletionTime; 
+        }
+        set
+        {
+            _canAttack = value;
+        }
+    }
+
     private void Awake()
     {
         m_playerInput = GetComponent<PlayerInput>();
@@ -48,7 +61,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (context.performed)
         {
-            if (Time.time < _attackCompletionTime) return;
+            if (!CanAttack) return;
             _attackTimer = Time.time + m_attackDuration;
             _attackCompletionTime = Time.time + m_attackDuration + m_attackCooldown;
             m_hitRegion.DamageAmount = m_attackDamage;
