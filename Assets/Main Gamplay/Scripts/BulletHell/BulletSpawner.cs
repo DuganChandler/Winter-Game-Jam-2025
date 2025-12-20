@@ -12,6 +12,14 @@ public class BulletSpawner : MonoBehaviour {
     [Header("Spawner Type")]
     [SerializeField] private BulletSpawnerType bulletSpawnerType;
 
+    [Header("Targetting Config")]
+    [SerializeField] private TargetManager targetManager;
+
+    [Header("Burst Config")]
+    [SerializeField] private bool useBurst;
+    [SerializeField] private float fireDuration = 1.5f;
+    [SerializeField] private float pauseDuration = 0.5f;
+
     [Header("Rotation Config")]
     [SerializeField] private float rotationSpeed;
 
@@ -26,17 +34,10 @@ public class BulletSpawner : MonoBehaviour {
     [SerializeField] private GameObject bullet;
     [SerializeField] private BulletPool bulletPool;
 
-    [Header("Burst Config")]
-    [SerializeField] private bool useBurst;
-    [SerializeField] private float fireDuration = 1.5f;
-    [SerializeField] private float pauseDuration = 0.5f;
 
     [Header("Spawn Config")]
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private Transform bulletSpawnerPivot;
-
-    [Header("Targetting Config")]
-    [SerializeField] private TargetManager targetManager;
 
     private Vector3 rotationAxis = Vector3.up;
 
