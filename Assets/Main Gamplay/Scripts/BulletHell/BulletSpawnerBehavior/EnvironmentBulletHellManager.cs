@@ -18,7 +18,7 @@ public class EnvironmentBulletHellManager : MonoBehaviour
         BossCore.OnPhaseChange += NextPhase;  
 
         BossMovement.OnBossCenter += DeactivateSpawners;
-        // OnRoar += NextPattern;
+        BossCore.OnBossRoar += NextPattern;
     }
 
     void OnDisable()
@@ -27,7 +27,7 @@ public class EnvironmentBulletHellManager : MonoBehaviour
         BossCore.OnBossProne -= DeactivateSpawners;
 
         BossMovement.OnBossCenter -= DeactivateSpawners;
-        // OnRoar -= NextPattern;
+        BossCore.OnBossRoar -= NextPattern;
     }
 
     void Awake()
