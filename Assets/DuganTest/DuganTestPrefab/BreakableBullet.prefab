@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5280315186279088220}
   - component: {fileID: 5975212215845332970}
   m_Layer: 6
-  m_Name: Bullet
+  m_Name: BreakableBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8af7fb580f8783b4f8c039e82df7099b, type: 2}
+  - {fileID: 2100000, guid: d6e2ff787815af54b91db9df0bebe584, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -994,7 +994,9 @@ MonoBehaviour:
   - {fileID: 31766045}
   bulletSpawnerPivot: {fileID: 1730873020}
   targetManager: {fileID: 662091415}
-  bulletPool: {fileID: 1873589498}
+  unbreakablePool: {fileID: 1873589498}
+  breakablePool: {fileID: 2067403585}
+  bulletKind: 1
 --- !u!1 &1860080051
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,7 +1036,9 @@ MonoBehaviour:
   - {fileID: 1837508339}
   bulletSpawnerPivot: {fileID: 1579107086}
   targetManager: {fileID: 662091415}
-  bulletPool: {fileID: 1873589498}
+  unbreakablePool: {fileID: 1873589498}
+  breakablePool: {fileID: 2067403585}
+  bulletKind: 0
 --- !u!136 &1860080053
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1142,7 +1146,7 @@ GameObject:
   - component: {fileID: 1873589499}
   - component: {fileID: 1873589498}
   m_Layer: 0
-  m_Name: BulletObjectPool
+  m_Name: UnbreakableBulletPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1161,7 +1165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectPool
   amountToPool: 100
-  bulletToPool: {fileID: 7187951364459162667, guid: bfeabef838d024f48b7fd2ca4e2cb3b9, type: 3}
+  bulletToPool: {fileID: 7187951364459162667, guid: a55f647d14201cc4f906335adb967e37, type: 3}
 --- !u!4 &1873589499
 Transform:
   m_ObjectHideFlags: 0
@@ -1291,6 +1295,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2067403584
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2067403586}
+  - component: {fileID: 2067403585}
+  m_Layer: 0
+  m_Name: BreakableBulletPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2067403585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067403584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b248dc45c6410849b33558a090cd969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectPool
+  amountToPool: 100
+  bulletToPool: {fileID: 7187951364459162667, guid: bfeabef838d024f48b7fd2ca4e2cb3b9, type: 3}
+--- !u!4 &2067403586
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067403584}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.85714, y: 0.6, z: 0.85714}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2083458541
 GameObject:
   m_ObjectHideFlags: 0
@@ -1328,7 +1378,9 @@ MonoBehaviour:
   - {fileID: 2101238234}
   bulletSpawnerPivot: {fileID: 1822750654}
   targetManager: {fileID: 662091415}
-  bulletPool: {fileID: 1873589498}
+  unbreakablePool: {fileID: 1873589498}
+  breakablePool: {fileID: 2067403585}
+  bulletKind: 1
 --- !u!136 &2083458543
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1605,6 +1657,7 @@ SceneRoots:
   - {fileID: 1689387140}
   - {fileID: 215841432}
   - {fileID: 1873589499}
+  - {fileID: 2067403586}
   - {fileID: 1822080909749036531}
   - {fileID: 172241361}
   - {fileID: 662091416}
