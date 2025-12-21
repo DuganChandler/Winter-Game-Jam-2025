@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Ryan/RyanTest.unity
-    guid: 1361daf7c52d2d845b3650c227eadfcf
+    path: Assets/Main Gamplay/Scenes/BossFight.unity
+    guid: a243c24b30fc28e41b9d510aa1c666d6
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
