@@ -297,25 +297,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bf7dc39a94d6f84f9f72d45cfff0347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletSpawner
-  bulletSpawnerType: 0
-  targetManager: {fileID: 1146313824}
-  useBurst: 0
-  fireDuration: 1.5
-  pauseDuration: 0.5
-  rotationSpeed: 25
-  sineAmplitude: 45
-  sineFrequency: 1
-  bulletSpeed: 2
-  bulletLifeTime: 5
-  fireRate: 0.5
-  bullet: {fileID: 7187951364459162667, guid: bfeabef838d024f48b7fd2ca4e2cb3b9, type: 3}
-  bulletPool: {fileID: 957332981}
+  spawnerId: 8
   spawnPoints:
   - {fileID: 738145865}
   - {fileID: 633932329}
   - {fileID: 1609253802}
   - {fileID: 1636957907}
   bulletSpawnerPivot: {fileID: 2097043658}
+  targetManager: {fileID: 1146313824}
+  bulletPool: {fileID: 957332981}
 --- !u!4 &126855915
 Transform:
   m_ObjectHideFlags: 0
@@ -785,7 +775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b1a08d6b6b0f284081895534a54d9ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TargetManager
-  playerTarget: {fileID: 1193902289}
+  playerTarget: {fileID: 1579234244}
 --- !u!4 &1146313825
 Transform:
   m_ObjectHideFlags: 0
@@ -830,24 +820,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bf7dc39a94d6f84f9f72d45cfff0347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletSpawner
-  bulletSpawnerType: 0
-  targetManager: {fileID: 1146313824}
-  useBurst: 0
-  fireDuration: 1.5
-  pauseDuration: 0.5
-  rotationSpeed: 50
-  sineAmplitude: 45
-  sineFrequency: 1
-  bulletSpeed: 3
-  bulletLifeTime: 5
-  fireRate: 0.5
-  bullet: {fileID: 7187951364459162667, guid: bfeabef838d024f48b7fd2ca4e2cb3b9, type: 3}
-  bulletPool: {fileID: 957332981}
+  spawnerId: 8
   spawnPoints:
   - {fileID: 196732018}
   - {fileID: 2137996134}
   - {fileID: 762316278}
   bulletSpawnerPivot: {fileID: 1074122648}
+  targetManager: {fileID: 1146313824}
+  bulletPool: {fileID: 957332981}
 --- !u!4 &1173760656
 Transform:
   m_ObjectHideFlags: 0
@@ -1252,7 +1232,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!1 &1315875702
 GameObject:
@@ -1768,22 +1748,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bf7dc39a94d6f84f9f72d45cfff0347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletSpawner
-  bulletSpawnerType: 0
-  targetManager: {fileID: 1146313824}
-  useBurst: 1
-  fireDuration: 1.5
-  pauseDuration: 0.5
-  rotationSpeed: 50
-  sineAmplitude: 45
-  sineFrequency: 1
-  bulletSpeed: 3
-  bulletLifeTime: 5
-  fireRate: 0.3
-  bullet: {fileID: 7187951364459162667, guid: bfeabef838d024f48b7fd2ca4e2cb3b9, type: 3}
-  bulletPool: {fileID: 957332981}
+  spawnerId: 8
   spawnPoints:
   - {fileID: 1315875703}
   bulletSpawnerPivot: {fileID: 1222378780}
+  targetManager: {fileID: 1146313824}
+  bulletPool: {fileID: 957332981}
 --- !u!4 &1697573867
 Transform:
   m_ObjectHideFlags: 0
