@@ -6,6 +6,8 @@ public class SelfieStickUI : MonoBehaviour
 {
     private Animator m_animator;
     [SerializeField] private Image m_meterFill;
+    [SerializeField] private Sprite m_cameraFill;
+    [SerializeField] private Sprite m_takenPhotoFill;
     private void Awake()
     {
         Setup();
@@ -19,6 +21,7 @@ public class SelfieStickUI : MonoBehaviour
         Player.OnActivateSelfieMode += ShowSelfieUI;
         Player.OnDeactivateSelfieMode += HideSelfieUI;
         SelfieStick.OnTargetVisible += SetMeterLength;
+        SelfieStick.OnMeterFull += OnFullMeter;
     }
 
     private void OnDestroy()
@@ -40,6 +43,17 @@ public class SelfieStickUI : MonoBehaviour
     }
     private void SetMeterLength(float percentage)
     {
-        if (m_meterFill != null) m_meterFill.transform.localPosition = Vector2.right * -582.9f * (1 - percentage); 
+        if (m_meterFill != null)
+        {
+            m_meterFill.transform.localPosition = Vector2.right * -582.9f * (1 - percentage);
+            if (percentage < 0.1f)
+            {
+                m_meterFill.sprite = m_cameraFill;
+            }
+        }
+    }
+    private void OnFullMeter()
+    {
+        if (m_meterFill != null) m_meterFill.sprite = m_takenPhotoFill;
     }
 }

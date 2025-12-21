@@ -12,6 +12,8 @@ public class EnvironmentBulletHellManager : MonoBehaviour
 
     private int currentPhaseIndex = 0;
 
+    private bool startTriggered = false;
+
     void OnEnable()
     {
         BossCore.OnDeactivateBullets += DeactivateSpawners;
@@ -23,6 +25,7 @@ public class EnvironmentBulletHellManager : MonoBehaviour
 
     void OnDisable()
     {
+        startTriggered = false;
         BossCore.OnPhaseChange -= NextPhase;  
         BossCore.OnDeactivateBullets -= DeactivateSpawners;
 
@@ -39,9 +42,15 @@ public class EnvironmentBulletHellManager : MonoBehaviour
         }
     }
 
-    void Start()
+    void Update()
     {
-        ActivatePattern(0);
+        if (startTriggered) return;        
+
+        if (GameManager.Instance.GameState == GameState.Gameplay)
+        {
+            startTriggered = true;
+            ActivatePattern(0);
+        }
     }
 
     public void NextPattern()

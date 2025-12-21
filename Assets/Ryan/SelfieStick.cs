@@ -14,6 +14,7 @@ public class SelfieStick : MonoBehaviour
     public static event System.Action OnMeterFull;
     private float detectionFillAmount;
     public bool IsSelfieMode = false;
+    public bool TakenPhoto = false;
 
     private void Awake()
     {
@@ -22,7 +23,7 @@ public class SelfieStick : MonoBehaviour
     }
     private void Update()
     {
-        if (IsSelfieMode && IsTargetVisible())
+        if (!TakenPhoto && IsSelfieMode && IsTargetVisible())
         {
             // Do stuff to the target
             detectionFillAmount += detectionGainSpeed * Time.deltaTime;
@@ -30,15 +31,21 @@ public class SelfieStick : MonoBehaviour
 
             if (detectionFillAmount >= detectionMaxFill)
             {
-                if (OnMeterFull != null) OnMeterFull.Invoke();
-                detectionFillAmount = 0f;
+                OnMeterFull?.Invoke();
+                SoundManager.Instance.PlaySound("take_photo");
+
+                TakenPhoto = true;
             }
         }
         else
         {
             detectionFillAmount -= detectionFallOffSpeed * Time.deltaTime;
-            if (detectionFillAmount < 0f) detectionFillAmount = 0f;
-            if (OnTargetVisible != null) OnTargetVisible.Invoke(detectionFillAmount / detectionMaxFill);
+            if (detectionFillAmount < 0f)
+            {
+                detectionFillAmount = 0f;
+                TakenPhoto = false;
+            }
+            OnTargetVisible?.Invoke(detectionFillAmount / detectionMaxFill);
         }
     }
     private bool IsTargetVisible()

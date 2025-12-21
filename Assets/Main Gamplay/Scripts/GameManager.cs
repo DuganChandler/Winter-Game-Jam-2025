@@ -22,7 +22,22 @@ public class GameManager : MonoBehaviour {
         } 
     }
 
-    public GameState GameState { get; set; } = GameState.MainMenu;
+    public event System.Action<GameState> OnGameStateChanged;
+
+    private GameState m_gameState = GameState.MainMenu;
+    public GameState GameState
+    {
+        get
+        {
+            return m_gameState;
+        }
+        set
+        {
+            if (m_gameState == value) return; 
+            m_gameState = value;
+            OnGameStateChanged?.Invoke(m_gameState);
+        }
+    }
 
     public bool Restart { get; set; } = false;
 }
