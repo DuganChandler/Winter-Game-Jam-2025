@@ -25,4 +25,4 @@ MonoBehaviour:
     sineFrequency: 0
     bulletSpeed: 3
     bulletLifeTime: 10
-    fireRate: 0.8
+    fireRate: 0.4
