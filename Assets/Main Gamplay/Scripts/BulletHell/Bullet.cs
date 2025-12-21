@@ -1,17 +1,24 @@
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public enum BulletKind
+{
+    Breakable,
+    UnBreakable
+}
+
+public class Bullet : MonoBehaviour 
 {
     private float lifeTime;
     private float speed;
     private float rotation;
 
-    private Vector3 spawnpoint;
     private float timer;
 
     public float LifeTime { get => lifeTime; set => lifeTime = value; } 
     public float Speed { get => speed; set => speed = value; } 
     public float Rotation { get => rotation; set => rotation = value; }
+
+    public bool IsBreakable { get; set; }
 
     void OnEnable()
     {
@@ -33,5 +40,4 @@ public class Bullet : MonoBehaviour
     {
         transform.position += speed * Time.deltaTime * transform.forward;
     }
-
 }
