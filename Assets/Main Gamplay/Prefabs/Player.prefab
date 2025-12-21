@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 3764947477369730086}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.0949678, z: 2.510636}
-  m_LocalScale: {x: 2.7711215, y: 2.7711215, z: 2.7711215}
+  m_LocalPosition: {x: 0, y: 2.03, z: 3.34}
+  m_LocalScale: {x: 3.708869, y: 3.676447, z: 5.112044}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 29581727619612550}
@@ -71,7 +71,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3764947477369730086}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -398,6 +398,7 @@ MonoBehaviour:
   detectionFallOffSpeed: 0.25
   target: {fileID: 0}
   IsSelfieMode: 0
+  TakenPhoto: 0
 --- !u!1 &8182209348643522291
 GameObject:
   m_ObjectHideFlags: 0
