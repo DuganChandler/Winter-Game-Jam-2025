@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8528538512694815323}
   - component: {fileID: 4619707074760012891}
   - component: {fileID: 1783374520629824403}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DamageBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,6 +122,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6d009e2d09302fe4e85eda9c5e29ffbf, type: 3}
       propertyPath: m_Name
       value: BreakableSnowball
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6d009e2d09302fe4e85eda9c5e29ffbf, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
