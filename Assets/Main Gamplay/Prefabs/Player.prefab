@@ -602,6 +602,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   maxHealth: 7
   CanSelfie: 1
+  IFrameActive: 0
 --- !u!54 &6439326461559835232
 Rigidbody:
   m_ObjectHideFlags: 0

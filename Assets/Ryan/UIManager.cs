@@ -8,9 +8,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject deathMenu;
     private void Awake()
+    { 
+        Player.OnPlayerDeath += OnPlayerDeath;
+    }
+    private void Start()
     {
         UnPauseGame();
-        Player.OnPlayerDeath += OnPlayerDeath;
     }
     private void OnDestroy()
     {

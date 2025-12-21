@@ -32,6 +32,8 @@ public class Player : Entity
 
         // Input Actions
         selfieAction = m_playerInput.actions["Selfie"];
+
+        GameManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
 
     private void Start()
@@ -100,17 +102,51 @@ public class Player : Entity
     }
     protected override void Die()
     {
-        m_playerInput.actions.Disable();
-        m_playerMovement.enabled = false;
-        m_playerAttack.enabled = false;
+        DisablePlayer();
         m_animator.Play("death");
+        GameManager.Instance.GameState = GameState.Gameover;
         OnPlayerDeath?.Invoke();
     }
     public void DoVictoryDance()
     {
+        DisablePlayer();
+        m_animator.Play("dance");
+    }
+    public void EnablePlayer()
+    {
+        m_playerInput.actions.Enable();
+        m_playerMovement.enabled = true;
+        m_playerAttack.enabled = true;
+    }
+    public void DisablePlayer()
+    {
         m_playerInput.actions.Disable();
         m_playerMovement.enabled = false;
         m_playerAttack.enabled = false;
-        m_animator.Play("dance");
+    }
+    private void OnGameStateChanged(GameState state)
+    {
+        switch (state)
+        {
+            case GameState.Gameplay:
+                EnablePlayer();
+                break;
+            case GameState.MainMenu:
+                m_animator.Play("dance");
+                m_playerMovement.RotateTo(Vector3.back);
+                goto default;
+            default:
+                DisablePlayer();
+                break;
+
+        }
+        if (state != GameState.Gameplay)
+        {
+            DisablePlayer();
+        }
+        else
+        {
+            EnablePlayer();
+        }
     }
 }

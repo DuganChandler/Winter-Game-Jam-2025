@@ -142,4 +142,11 @@ public class PlayerMovement : MonoBehaviour
         //    );
         m_visual.rotation = targetRotation;
     }
+
+    public void RotateTo(Vector3 newDirection)
+    {
+        _facingDirection = newDirection;
+        Quaternion targetRotation = Quaternion.LookRotation(_facingDirection);
+        m_visual.rotation = targetRotation;
+    }
 }
