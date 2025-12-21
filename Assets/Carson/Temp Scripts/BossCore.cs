@@ -262,6 +262,7 @@ public class BossCore : Entity
         animator.SetBool("Prone",true);
         animator.SetTrigger("ProneTrigger");
         OnDeactivateBullets?.Invoke();
+        OnBossDeactivateBullets?.Invoke();
         // bullet manager deactivate
         // timer = 0 and pause
         currentChaseTime = 0;
@@ -287,6 +288,7 @@ public class BossCore : Entity
     {
         animator.speed = 0;
         OnDeactivateBullets?.Invoke();
+        OnBossDeactivateBullets?.Invoke();
         frozen = true;
         freezeFrame = true;
         rb.constraints = RigidbodyConstraints.FreezeAll;
