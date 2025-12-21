@@ -30,6 +30,10 @@ public class SoundManager : MonoBehaviour {
 
     public void PlayMusic(string trackName, float fadeDuration = 0.5f) {
         musicSource.mute = false;
+        if (musicSource.isPlaying && musicSource.clip != null && musicSource.clip.name == trackName)
+        {
+            return;
+        }
         StartCoroutine(AnimateMusicCrossfade(musicLibrary.GetClipFromName(trackName), fadeDuration));
     }
 

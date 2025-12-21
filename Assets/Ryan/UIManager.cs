@@ -17,7 +17,8 @@ public class UIManager : MonoBehaviour
     }
     private void Update()
     { 
-        if (Input.GetKeyDown(KeyCode.Escape) && GameManager.Instance.GameState == GameState.Gameplay)
+        if (Input.GetKeyDown(KeyCode.Escape) 
+            && (GameManager.Instance.GameState == GameState.Gameplay || GameManager.Instance.GameState == GameState.Pause))
         {
             TogglePause();
         }
