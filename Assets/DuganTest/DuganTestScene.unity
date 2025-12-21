@@ -1526,6 +1526,10 @@ PrefabInstance:
       value: BulletHellManager
       objectReference: {fileID: 0}
     - target: {fileID: 6194411825039803402, guid: 5f38de460da866c42a4191da4d4ac713, type: 3}
+      propertyPath: phases.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194411825039803402, guid: 5f38de460da866c42a4191da4d4ac713, type: 3}
       propertyPath: 'bulletSpawners.Array.data[0]'
       value: 
       objectReference: {fileID: 1852593275}
@@ -1537,6 +1541,18 @@ PrefabInstance:
       propertyPath: 'bulletSpawners.Array.data[2]'
       value: 
       objectReference: {fileID: 2083458542}
+    - target: {fileID: 6194411825039803402, guid: 5f38de460da866c42a4191da4d4ac713, type: 3}
+      propertyPath: phases.Array.data[0].bulletPatternAssets.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194411825039803402, guid: 5f38de460da866c42a4191da4d4ac713, type: 3}
+      propertyPath: 'phases.Array.data[0].bulletPatternAssets.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 46af996b52240f243862c1e65ea62afc, type: 2}
+    - target: {fileID: 6194411825039803402, guid: 5f38de460da866c42a4191da4d4ac713, type: 3}
+      propertyPath: 'phases.Array.data[0].bulletPatternAssets.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 5dea7d48467bbac418378e8bcf300e56, type: 2}
     - target: {fileID: 8969184620156150757, guid: 5f38de460da866c42a4191da4d4ac713, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
