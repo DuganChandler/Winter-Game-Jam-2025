@@ -116,11 +116,20 @@ public class PlayerMovement : MonoBehaviour
     public IEnumerator OnDodgeEnd()
     {
         yield return new WaitUntil(() => m_animator.GetCurrentAnimatorStateInfo(0).IsName("dodge"));
+        //m_player.IFrameActive = false;
+        //yield return new WaitForSeconds(0.2f);
+        m_player.IFrameActive = true;
+        yield return new WaitForSeconds(0.5f);
+        m_player.IFrameActive = false;
         yield return new WaitUntil(() => m_animator.GetCurrentAnimatorStateInfo(0).IsName("idle"));
         CanMove = true;
-        CanDodge = true;
+        
         m_player.CanSelfie = true;
         m_playerAttack.CanAttack = true;
+
+        // Dodge CoolDown
+        yield return new WaitForSeconds(0.4f);
+        CanDodge = true;
     }
     private void Rotate()
     {
