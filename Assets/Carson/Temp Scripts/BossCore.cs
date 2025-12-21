@@ -301,6 +301,7 @@ public class BossCore : Entity
         animator.speed = 1;
         //frozen = false;
         freezeFrame = false;
+        OnBossRoar?.Invoke();
     }
     void HandleMeterFull()
     {
