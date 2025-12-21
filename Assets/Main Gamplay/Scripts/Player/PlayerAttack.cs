@@ -23,6 +23,7 @@ public class PlayerAttack : MonoBehaviour
     private Animator m_animator;
     private PlayerMovement m_playerMovement;
     private Player m_player;
+    private Rigidbody m_rb;
 
     [SerializeField] private bool _canAttack = true;
     public bool CanAttack
@@ -44,6 +45,7 @@ public class PlayerAttack : MonoBehaviour
         m_animator = GetComponentInChildren<Animator>();
         m_playerMovement = GetComponent<PlayerMovement>();
         m_player = GetComponent<Player>();
+        m_rb = GetComponent<Rigidbody>();
 
         // Input Actions
         attack = m_playerInput.actions["Attack"];
@@ -65,6 +67,7 @@ public class PlayerAttack : MonoBehaviour
             m_playerMovement.CanMove = false;
             m_playerMovement.CanDodge = false;
             m_player.CanSelfie = false;
+            m_rb.linearVelocity = Vector3.zero;
             m_hitRegion.DamageAmount = m_attackDamage;
             m_animator.Play("slash");
             //m_hitRegion.gameObject.SetActive(true);
