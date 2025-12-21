@@ -42,7 +42,6 @@ public class SelfieStick : MonoBehaviour
             {
                 OnMeterFull?.Invoke();
                 SoundManager.Instance.PlaySound("take_photo");
-                detectionFallOffSpeed = 0f;
                 TakenPhoto = true;
             }
         }
@@ -66,6 +65,6 @@ public class SelfieStick : MonoBehaviour
     }
     private void OnFreeze(float time)
     {
-        detectionFallOffSpeed = detectionMaxFill / (time * Time.deltaTime);
+        detectionFallOffSpeed = detectionMaxFill / time;
     }
 }
