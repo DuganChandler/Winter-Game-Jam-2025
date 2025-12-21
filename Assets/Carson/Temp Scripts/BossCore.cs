@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Collections;
 using UnityEngine;
 
 public class BossCore : Entity
@@ -29,6 +30,9 @@ public class BossCore : Entity
     float currentChaseTime;
     [SerializeField] float maxChaseTime;    
     bool frozen;
+    public bool attacking = false;
+    bool inFront;
+    bool dead = false;
 
     void OnEnable()
     {
@@ -59,17 +63,28 @@ public class BossCore : Entity
             proneThreshold = (int)currentHealth - proneDamage;
 
         }
-        if (currentHealth <= 0)
+        if (!dead)
         {
-            onDeath();
-        }
         if (!frozen)
         {
             Vector3 direction = player.transform.position - transform.position;
             direction.y = 0f;
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction), 50 * Time.fixedDeltaTime);
-        }
 
+            
+            
+        }
+        Vector3 toTarget = (player.position - transform.position).normalized;
+    		
+    	if (Vector3.Dot(toTarget, transform.forward) > 0) {
+    		Debug.Log("Target is in front of this game object.");
+            inFront = true;
+    	} else {
+    		Debug.Log("Target is not in front of this game object.");
+            inFront = false;
+    	}
+
+        
         if (!animator.GetBool("Prone"))
         {
             currentChaseTime += Time.deltaTime;
@@ -78,6 +93,7 @@ public class BossCore : Entity
                 rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
                 animator.SetBool("Chase", false);
                 frozen = false;
+                attacking = false;
                 int attackChoice = Random.Range(3,0);
                 
                 switch (attackChoice)
@@ -86,6 +102,7 @@ public class BossCore : Entity
                         animator.SetTrigger("Shoot");
                         OnAttackChange?.Invoke();
                         frozen = true;
+                        attacking = true;
                         Debug.Log("shoot");
                         break;
                     case 2: 
@@ -104,6 +121,7 @@ public class BossCore : Entity
                 currentChaseTime = 0;
             }
         }
+    }
 
         
         /*int attackChoice = Random.Range(5,0);
@@ -130,9 +148,28 @@ public class BossCore : Entity
         }*/
 
     }
-    void onDeath()
+    public override void Damage(float amount)
     {
-        boss.SetActive(false);
+        if(attacking)
+        {
+            currentHealth -= amount *3;
+            Debug.Log("CRIT");
+        }else if (!inFront)
+        {
+            currentHealth -= amount *2;
+            Debug.Log("Back Hit");
+        }
+        else
+        {
+            currentHealth -= amount;
+            Debug.Log("Hit");
+        }
+        if (currentHealth <= 0)
+        {
+            animator.SetTrigger("Death");
+            dead = true;
+            //Die();
+        }
     }
     public void LineBullet()
     {
