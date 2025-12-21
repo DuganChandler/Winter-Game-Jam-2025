@@ -305,7 +305,9 @@ MonoBehaviour:
   - {fileID: 1636957907}
   bulletSpawnerPivot: {fileID: 2097043658}
   targetManager: {fileID: 1146313824}
-  bulletPool: {fileID: 957332981}
+  unbreakablePool: {fileID: 2024751479}
+  breakablePool: {fileID: 957332981}
+  bulletKind: 0
 --- !u!4 &126855915
 Transform:
   m_ObjectHideFlags: 0
@@ -1297,7 +1299,7 @@ GameObject:
   - component: {fileID: 957332982}
   - component: {fileID: 957332981}
   m_Layer: 0
-  m_Name: BulletObjectPool
+  m_Name: BreakableBulletObjectPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1447,7 +1449,9 @@ MonoBehaviour:
   - {fileID: 762316278}
   bulletSpawnerPivot: {fileID: 1074122648}
   targetManager: {fileID: 1146313824}
-  bulletPool: {fileID: 957332981}
+  unbreakablePool: {fileID: 2024751479}
+  breakablePool: {fileID: 957332981}
+  bulletKind: 0
 --- !u!4 &1173760656
 Transform:
   m_ObjectHideFlags: 0
@@ -2204,6 +2208,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1215551608}
     m_Modifications:
+    - target: {fileID: 111705988726923960, guid: b37866e6693008e458bbd97ae0722ec5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 111705988726923960, guid: b37866e6693008e458bbd97ae0722ec5, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 111705988726923960, guid: b37866e6693008e458bbd97ae0722ec5, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 111705988726923960, guid: b37866e6693008e458bbd97ae0722ec5, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 111705988726923960, guid: b37866e6693008e458bbd97ae0722ec5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 111705988726923960, guid: b37866e6693008e458bbd97ae0722ec5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 763412228135171093, guid: b37866e6693008e458bbd97ae0722ec5, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2311,6 +2339,30 @@ PrefabInstance:
     - target: {fileID: 2994909166004270822, guid: b37866e6693008e458bbd97ae0722ec5, type: 3}
       propertyPath: m_Name
       value: UICanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 3300785878007430896, guid: b37866e6693008e458bbd97ae0722ec5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3300785878007430896, guid: b37866e6693008e458bbd97ae0722ec5, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3300785878007430896, guid: b37866e6693008e458bbd97ae0722ec5, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3300785878007430896, guid: b37866e6693008e458bbd97ae0722ec5, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3300785878007430896, guid: b37866e6693008e458bbd97ae0722ec5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3300785878007430896, guid: b37866e6693008e458bbd97ae0722ec5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6482603202786145455, guid: b37866e6693008e458bbd97ae0722ec5, type: 3}
       propertyPath: m_SizeDelta.x
@@ -2432,6 +2484,30 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0.4745098
       objectReference: {fileID: 0}
+    - target: {fileID: 8683966258967410928, guid: b37866e6693008e458bbd97ae0722ec5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683966258967410928, guid: b37866e6693008e458bbd97ae0722ec5, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683966258967410928, guid: b37866e6693008e458bbd97ae0722ec5, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683966258967410928, guid: b37866e6693008e458bbd97ae0722ec5, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683966258967410928, guid: b37866e6693008e458bbd97ae0722ec5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683966258967410928, guid: b37866e6693008e458bbd97ae0722ec5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2471,7 +2547,9 @@ MonoBehaviour:
   - {fileID: 1315875703}
   bulletSpawnerPivot: {fileID: 1222378780}
   targetManager: {fileID: 1146313824}
-  bulletPool: {fileID: 957332981}
+  unbreakablePool: {fileID: 2024751479}
+  breakablePool: {fileID: 957332981}
+  bulletKind: 0
 --- !u!4 &1697573867
 Transform:
   m_ObjectHideFlags: 0
@@ -2829,6 +2907,52 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ae9a7b8b1635ba408debdb7b9b13f7f, type: 3}
+--- !u!1 &2024751478
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2024751480}
+  - component: {fileID: 2024751479}
+  m_Layer: 0
+  m_Name: UnbreakableBulletObjectPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2024751479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024751478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b248dc45c6410849b33558a090cd969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectPool
+  amountToPool: 100
+  bulletToPool: {fileID: 7187951364459162667, guid: a55f647d14201cc4f906335adb967e37, type: 3}
+--- !u!4 &2024751480
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024751478}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.85714, y: 0.6, z: 0.85714}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2092957892
 GameObject:
   m_ObjectHideFlags: 0
@@ -2987,6 +3111,7 @@ SceneRoots:
   - {fileID: 593776357}
   - {fileID: 933260548}
   - {fileID: 957332982}
+  - {fileID: 2024751480}
   - {fileID: 1146313825}
   - {fileID: 638291359}
   - {fileID: 1215551608}
