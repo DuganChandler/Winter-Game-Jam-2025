@@ -795,57 +795,6 @@ Transform:
   - {fileID: 31766045}
   m_Father: {fileID: 1852593274}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1809563410
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1809563412}
-  - component: {fileID: 1809563411}
-  m_Layer: 0
-  m_Name: BulletHellManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1809563411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1809563410}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fccae47dd1fadf8449b862f08ce5326d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BulletHellManager
-  patterns:
-  - {fileID: 11400000, guid: 46af996b52240f243862c1e65ea62afc, type: 2}
-  - {fileID: 11400000, guid: 5dea7d48467bbac418378e8bcf300e56, type: 2}
-  bulletSpawners:
-  - {fileID: 1852593275}
-  - {fileID: 1860080052}
-  - {fileID: 2083458542}
---- !u!4 &1809563412
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1809563410}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1822750653
 GameObject:
   m_ObjectHideFlags: 0
@@ -1037,15 +986,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bf7dc39a94d6f84f9f72d45cfff0347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletSpawner
-  targetManager: {fileID: 662091415}
   spawnerId: 1
-  bulletPool: {fileID: 1873589498}
   spawnPoints:
   - {fileID: 1130044571}
   - {fileID: 1326989036}
   - {fileID: 117578164}
   - {fileID: 31766045}
   bulletSpawnerPivot: {fileID: 1730873020}
+  targetManager: {fileID: 662091415}
+  bulletPool: {fileID: 1873589498}
 --- !u!1 &1860080051
 GameObject:
   m_ObjectHideFlags: 0
@@ -1078,14 +1027,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bf7dc39a94d6f84f9f72d45cfff0347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletSpawner
-  targetManager: {fileID: 662091415}
   spawnerId: 0
-  bulletPool: {fileID: 1873589498}
   spawnPoints:
   - {fileID: 1597544817}
   - {fileID: 1165085541}
   - {fileID: 1837508339}
   bulletSpawnerPivot: {fileID: 1579107086}
+  targetManager: {fileID: 662091415}
+  bulletPool: {fileID: 1873589498}
 --- !u!136 &1860080053
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1374,12 +1323,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bf7dc39a94d6f84f9f72d45cfff0347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletSpawner
-  targetManager: {fileID: 662091415}
   spawnerId: 3
-  bulletPool: {fileID: 1873589498}
   spawnPoints:
   - {fileID: 2101238234}
   bulletSpawnerPivot: {fileID: 1822750654}
+  targetManager: {fileID: 662091415}
+  bulletPool: {fileID: 1873589498}
 --- !u!136 &2083458543
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1564,6 +1513,75 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07ab9aa17d97f3149808bc6e7450acd8, type: 3}
+--- !u!1001 &3373735075581519347
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2903293068542863584, guid: 5f38de460da866c42a4191da4d4ac713, type: 3}
+      propertyPath: m_Name
+      value: BulletHellManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194411825039803402, guid: 5f38de460da866c42a4191da4d4ac713, type: 3}
+      propertyPath: 'bulletSpawners.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1852593275}
+    - target: {fileID: 6194411825039803402, guid: 5f38de460da866c42a4191da4d4ac713, type: 3}
+      propertyPath: 'bulletSpawners.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1860080052}
+    - target: {fileID: 6194411825039803402, guid: 5f38de460da866c42a4191da4d4ac713, type: 3}
+      propertyPath: 'bulletSpawners.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2083458542}
+    - target: {fileID: 8969184620156150757, guid: 5f38de460da866c42a4191da4d4ac713, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8969184620156150757, guid: 5f38de460da866c42a4191da4d4ac713, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8969184620156150757, guid: 5f38de460da866c42a4191da4d4ac713, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8969184620156150757, guid: 5f38de460da866c42a4191da4d4ac713, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8969184620156150757, guid: 5f38de460da866c42a4191da4d4ac713, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8969184620156150757, guid: 5f38de460da866c42a4191da4d4ac713, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8969184620156150757, guid: 5f38de460da866c42a4191da4d4ac713, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8969184620156150757, guid: 5f38de460da866c42a4191da4d4ac713, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8969184620156150757, guid: 5f38de460da866c42a4191da4d4ac713, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8969184620156150757, guid: 5f38de460da866c42a4191da4d4ac713, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5f38de460da866c42a4191da4d4ac713, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1578,4 +1596,4 @@ SceneRoots:
   - {fileID: 1852593274}
   - {fileID: 1860080056}
   - {fileID: 2083458546}
-  - {fileID: 1809563412}
+  - {fileID: 3373735075581519347}

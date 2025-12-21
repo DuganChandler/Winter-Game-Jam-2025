@@ -28,7 +28,6 @@ public class BulletHellManager : MonoBehaviour
 
     void Update()
     {
-        
         patternTimer += Time.deltaTime;
 
         if (patternTimer >= patterns[currentPatternIndex].duration)
@@ -37,6 +36,7 @@ public class BulletHellManager : MonoBehaviour
         }
     }
 
+    // on boss roar
     public void NextPattern()
     {
         DeactivateSpawners();
@@ -61,6 +61,7 @@ public class BulletHellManager : MonoBehaviour
 
     }
 
+    // on boss center
     public void DeactivateSpawners()
     {
         foreach (BulletPatternAsset pattern in patterns)

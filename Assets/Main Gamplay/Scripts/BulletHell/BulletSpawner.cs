@@ -126,6 +126,7 @@ public class BulletSpawner : MonoBehaviour {
     public void Disable()
     {
         active = false;
+        bulletPool.DeactivatePooledObjects();
     }
 
     private void FireBullet() 
