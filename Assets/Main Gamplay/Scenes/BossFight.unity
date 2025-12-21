@@ -1278,7 +1278,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 249864624}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -8944,7 +8944,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4604a68a96fa9a24e89fa49b164af4e5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.16
+      value: -2.86
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4604a68a96fa9a24e89fa49b164af4e5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9603,15 +9603,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f91f5a945b702d646b2c415c3874bf56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossCore
-  maxHealth: 25
-  proneDamage: 15
+  maxHealth: 300
+  proneDamage: 100
   boss: {fileID: 1542038639}
   lineSpawner: {fileID: 1170095957}
   coneSpawner: {fileID: 1459128056}
   cardinalSpawner: {fileID: 80520275}
+  freezeTime: 5
+  proneTime: 2
   player: {fileID: 1108242963}
   transform: {fileID: 1542038640}
-  maxChaseTime: 10
+  maxChaseTime: 4
   freezeFrame: 0
   attacking: 0
   uniqueAttacks: 5

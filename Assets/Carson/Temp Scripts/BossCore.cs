@@ -18,12 +18,15 @@ public class BossCore : Entity
     bool lineActive = false;
     bool coneActive = false;
     bool cardinalActive = false;
+    public float freezeTime = 5f;
+    public float proneTime = 2f;
 
     public static event System.Action OnPhaseChange;
     public static event System.Action OnDeactivateBullets;
     public static event System.Action OnBossDeactivateBullets;
     public static event System.Action OnBossRoar;
     public static event System.Action OnAttackChange;
+    public static event System.Action<float> OnFreeze;
     [SerializeField] Transform player;
     Rigidbody rb;
     [SerializeField] Transform transform;
@@ -267,7 +270,7 @@ public class BossCore : Entity
         currentChaseTime = 0;
         frozen = true;
         rb.constraints = RigidbodyConstraints.FreezeAll;
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(proneTime);
 
         animator.SetBool("Prone",false);
         rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
@@ -293,7 +296,8 @@ public class BossCore : Entity
         // bullet manager deactivate
         // timer = 0 and pause
         currentChaseTime = 0;
-        yield return new WaitForSeconds(10);
+        OnFreeze?.Invoke(freezeTime);
+        yield return new WaitForSeconds(freezeTime);
         rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
         animator.speed = 1;

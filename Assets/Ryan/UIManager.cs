@@ -7,13 +7,16 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject deathMenu;
+    [SerializeField] private GameObject victoryScreen;
     private void Awake()
     { 
         Player.OnPlayerDeath += OnPlayerDeath;
+        GameManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
     private void OnDestroy()
     {
         Player.OnPlayerDeath -= OnPlayerDeath;
+        GameManager.Instance.OnGameStateChanged -= OnGameStateChanged;
     }
     private void Update()
     { 
@@ -69,5 +72,17 @@ public class UIManager : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(2f);
         deathMenu.SetActive(true);
+    }
+    private void OnGameStateChanged(GameState newState)
+    {
+        if (newState == GameState.Win)
+        {
+            StartCoroutine(VictoryCoroutine());
+        }
+    }
+    private IEnumerator VictoryCoroutine()
+    {
+        yield return new WaitForSeconds(2f);
+        victoryScreen.SetActive(true);
     }
 }

@@ -119,6 +119,7 @@ public class Player : Entity
         DisablePlayer();
         SoundManager.Instance.PlaySound("yeah");
         m_animator.Play("dance");
+        m_playerMovement.RotateTo(Vector3.back);
     }
     public void EnablePlayer()
     {

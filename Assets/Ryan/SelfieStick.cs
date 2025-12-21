@@ -16,12 +16,20 @@ public class SelfieStick : MonoBehaviour
     private float detectionFillAmount;
     public bool IsSelfieMode = false;
     public bool TakenPhoto = false;
+    private float perm;
 
     private void Awake()
     {
         m_selfieCamera = GetComponent<Camera>();
         detectionFillAmount = 0f;
+        BossCore.OnFreeze += OnFreeze;
+        perm = detectionFallOffSpeed;
     }
+    private void OnDestroy()
+    {
+        BossCore.OnFreeze -= OnFreeze;
+    }
+
     private void Update()
     {
         if (!TakenPhoto && IsSelfieMode && IsTargetVisible())
@@ -34,7 +42,7 @@ public class SelfieStick : MonoBehaviour
             {
                 OnMeterFull?.Invoke();
                 SoundManager.Instance.PlaySound("take_photo");
-
+                detectionFallOffSpeed = 0f;
                 TakenPhoto = true;
             }
         }
@@ -44,6 +52,7 @@ public class SelfieStick : MonoBehaviour
             if (detectionFillAmount < 0f)
             {
                 detectionFillAmount = 0f;
+                detectionFallOffSpeed = perm;
                 OnMeterEmpty?.Invoke();
                 TakenPhoto = false;
             }
@@ -54,5 +63,9 @@ public class SelfieStick : MonoBehaviour
     {
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(m_selfieCamera);
         return planes.All(planes => planes.GetDistanceToPoint(target.transform.position) >= 0);
+    }
+    private void OnFreeze(float time)
+    {
+        detectionFallOffSpeed = detectionMaxFill / (time * Time.deltaTime);
     }
 }
