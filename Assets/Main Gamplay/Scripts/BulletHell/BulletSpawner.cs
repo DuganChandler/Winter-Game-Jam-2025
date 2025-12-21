@@ -6,6 +6,12 @@ public enum BulletSpawnerType {
     SineWave
 }
 
+public enum BulletSpawnerOwner
+{
+    Boss,
+    Environment
+}
+
 public enum SpawnerId
 {
     North,
@@ -16,7 +22,9 @@ public enum SpawnerId
     NorthWest,
     SouthEast,
     SouthWest,
-    Boss
+    BossCardinal,
+    BossCone,
+    BossLine
 }
 
 public class BulletSpawner : MonoBehaviour {
