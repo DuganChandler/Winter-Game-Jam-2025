@@ -17,14 +17,14 @@ MonoBehaviour:
   - spawnerId: 0
     bulletSpawnerType: 0
     useBurst: 1
-    fireDuration: 2
-    pauseDuration: 0.5
-    rotationSpeed: 50
+    fireDuration: 0.8
+    pauseDuration: 0.35
+    rotationSpeed: 100
     sineAmplitude: 0
     sineFrequency: 0
     bulletSpeed: 3
     bulletLifeTime: 3
-    fireRate: 0.3
+    fireRate: 0.1
   - spawnerId: 1
     bulletSpawnerType: 2
     useBurst: 1
@@ -32,18 +32,18 @@ MonoBehaviour:
     pauseDuration: 0.5
     rotationSpeed: 0
     sineAmplitude: 45
-    sineFrequency: 3
+    sineFrequency: 10
     bulletSpeed: 3
     bulletLifeTime: 3
-    fireRate: 0.3
+    fireRate: 0.1
   - spawnerId: 3
-    bulletSpawnerType: 1
+    bulletSpawnerType: 0
     useBurst: 1
     fireDuration: 2
     pauseDuration: 0.5
-    rotationSpeed: 50
+    rotationSpeed: -100
     sineAmplitude: 0
     sineFrequency: 0
-    bulletSpeed: 3
+    bulletSpeed: 4
     bulletLifeTime: 3
-    fireRate: 0.3
+    fireRate: 0.1
