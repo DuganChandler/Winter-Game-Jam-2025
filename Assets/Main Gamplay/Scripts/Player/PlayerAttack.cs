@@ -22,6 +22,7 @@ public class PlayerAttack : MonoBehaviour
     private InputAction attack;
     private Animator m_animator;
     private PlayerMovement m_playerMovement;
+    private Player m_player;
 
     [SerializeField] private bool _canAttack = true;
     public bool CanAttack
@@ -42,6 +43,7 @@ public class PlayerAttack : MonoBehaviour
         m_playerInput = GetComponent<PlayerInput>();
         m_animator = GetComponentInChildren<Animator>();
         m_playerMovement = GetComponent<PlayerMovement>();
+        m_player = GetComponent<Player>();
 
         // Input Actions
         attack = m_playerInput.actions["Attack"];
@@ -62,9 +64,10 @@ public class PlayerAttack : MonoBehaviour
             CanAttack = false;
             m_playerMovement.CanMove = false;
             m_playerMovement.CanDodge = false;
+            m_player.CanSelfie = false;
             m_hitRegion.DamageAmount = m_attackDamage;
             m_animator.Play("slash");
-            m_hitRegion.gameObject.SetActive(true);
+            //m_hitRegion.gameObject.SetActive(true);
             _isAttacking = true;
             StartCoroutine(OnAttackEnd());
         }
@@ -75,9 +78,10 @@ public class PlayerAttack : MonoBehaviour
         yield return new WaitUntil(() => m_animator.GetCurrentAnimatorStateInfo(0).IsName("slash"));
         yield return new WaitUntil(() => m_animator.GetCurrentAnimatorStateInfo(0).IsName("idle"));
         yield return new WaitForSeconds(m_attackCooldown);
-        m_hitRegion.gameObject.SetActive(false);
+        //m_hitRegion.gameObject.SetActive(false);
         m_playerMovement.CanMove = true;
         m_playerMovement.CanDodge = true;
+        m_player.CanSelfie = true;
         CanAttack = true;
         _isAttacking = false;
     }

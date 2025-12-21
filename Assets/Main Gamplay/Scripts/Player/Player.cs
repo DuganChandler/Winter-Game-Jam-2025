@@ -15,6 +15,7 @@ public class Player : Entity
 
     // Input Events
     private InputAction selfieAction;
+    public bool CanSelfie = true;
 
     private void Awake()
     {
@@ -43,6 +44,7 @@ public class Player : Entity
     #region InputActions
     public void OnSelfie(InputAction.CallbackContext context)
     {
+        if (!CanSelfie) return;
         if (context.performed)
         {
             ActivateSelfieMode();

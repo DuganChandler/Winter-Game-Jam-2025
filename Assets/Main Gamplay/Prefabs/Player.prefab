@@ -253,7 +253,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1502203307003305718}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -9.246, y: -133.873, z: -2.124}
 --- !u!20 &6349916221914395290
 Camera:
   m_ObjectHideFlags: 0
@@ -562,15 +562,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af4b1a62c09bc2149b5fae744a4aaafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  m_topMoveSpeed: 5
+  m_topMoveSpeed: 8
   m_rotationSpeed: 5
-  m_dodgeSpeed: 20
-  m_dodge_cooldown: 0.8
+  m_dodgeSpeed: 8
   m_backstep_when_stationary: 0
   m_visual: {fileID: 29581727619612550}
   IsRotating: 1
   DodgeEnabled: 1
   CanMove: 1
+  CanDodge: 1
 --- !u!114 &3907509246662773413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -601,6 +601,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   maxHealth: 3
+  CanSelfie: 1
 --- !u!54 &6439326461559835232
 Rigidbody:
   m_ObjectHideFlags: 0

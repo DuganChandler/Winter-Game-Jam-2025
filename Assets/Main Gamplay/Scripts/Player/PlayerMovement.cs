@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerInput m_playerInput;
     private Animator m_animator;
     private PlayerAttack m_playerAttack;
+    private Player m_player;
 
     // Callable Events
     public static event System.Action<Vector2> OnMoveAction;
@@ -63,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
         m_playerInput = GetComponent<PlayerInput>();
         m_animator = GetComponentInChildren<Animator>();
         m_playerAttack = GetComponent<PlayerAttack>();
+        m_player = GetComponent<Player>();
 
         // Input Actions
         moveAction = m_playerInput.actions["Move"];
@@ -103,6 +105,8 @@ public class PlayerMovement : MonoBehaviour
         CanDodge = false;
         CanMove = false;
         m_playerAttack.CanAttack = false;
+        m_player.CanSelfie = false;
+
         int predicate = m_backstep_when_stationary && !_isMoving ? -1 : 1;
         Vector3 dodgeVelocity = predicate * _facingDirection * m_dodgeSpeed;
         m_animator.Play("dodge");
@@ -115,6 +119,7 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitUntil(() => m_animator.GetCurrentAnimatorStateInfo(0).IsName("idle"));
         CanMove = true;
         CanDodge = true;
+        m_player.CanSelfie = true;
         m_playerAttack.CanAttack = true;
     }
     private void Rotate()

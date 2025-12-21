@@ -531,7 +531,7 @@ Transform:
   m_GameObject: {fileID: 1813892740}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5703255, y: 0, z: 0, w: 0.8214188}
-  m_LocalPosition: {x: 0.0200454, y: 12, z: -4.4269633}
+  m_LocalPosition: {x: 0, y: 12.019, z: -4.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -816,6 +816,18 @@ PrefabInstance:
     - target: {fileID: 5485012834062855185, guid: 8ae9a7b8b1635ba408debdb7b9b13f7f, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.028009783
+      objectReference: {fileID: 0}
+    - target: {fileID: 5485012834062855185, guid: 8ae9a7b8b1635ba408debdb7b9b13f7f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -9.246
+      objectReference: {fileID: 0}
+    - target: {fileID: 5485012834062855185, guid: 8ae9a7b8b1635ba408debdb7b9b13f7f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -133.873
+      objectReference: {fileID: 0}
+    - target: {fileID: 5485012834062855185, guid: 8ae9a7b8b1635ba408debdb7b9b13f7f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -2.124
       objectReference: {fileID: 0}
     - target: {fileID: 6349916221914395290, guid: 8ae9a7b8b1635ba408debdb7b9b13f7f, type: 3}
       propertyPath: near clip plane
