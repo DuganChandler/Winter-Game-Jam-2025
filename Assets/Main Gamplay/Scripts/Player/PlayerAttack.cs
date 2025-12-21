@@ -22,7 +22,7 @@ public class PlayerAttack : MonoBehaviour
     private float _attackCompletionTime;
     private InputAction attack;
 
-    [SerializeField] private bool _canAttack;
+    [SerializeField] private bool _canAttack = true;
     public bool CanAttack
     {
         get 

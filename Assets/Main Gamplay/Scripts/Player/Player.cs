@@ -59,6 +59,7 @@ public class Player : Entity
         m_playerMovement.DodgeEnabled = false;
         priorSpeed = m_playerMovement.TopMoveSpeed;
         m_playerMovement.TopMoveSpeed = 2f;
+        m_playerAttack.CanAttack = false;
         m_selfieStick.IsSelfieMode = true;
     }
     private void DeactivateSelfieMode()
@@ -67,6 +68,7 @@ public class Player : Entity
         m_playerMovement.IsRotating = true;
         m_playerMovement.DodgeEnabled = true;
         m_playerMovement.TopMoveSpeed = priorSpeed;
+        m_playerAttack.CanAttack = true;
         m_selfieStick.IsSelfieMode = false; 
     }
 }
