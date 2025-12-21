@@ -11,10 +11,6 @@ public class UIManager : MonoBehaviour
     { 
         Player.OnPlayerDeath += OnPlayerDeath;
     }
-    private void Start()
-    {
-        UnPauseGame();
-    }
     private void OnDestroy()
     {
         Player.OnPlayerDeath -= OnPlayerDeath;
@@ -29,14 +25,16 @@ public class UIManager : MonoBehaviour
     public void RestartGame()
     {
         // sets the restart falg to treu to immediatly start the game in MainMenuController
+        UnPauseGame();
         GameManager.Instance.Restart = true;
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public void QuitGame()
     {
         // in case it becomes true accidently idk..
+        UnPauseGame();
         GameManager.Instance.Restart = false;
-        SceneManager.LoadSceneAsync("MainMenu");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public void PauseGame()
     {
