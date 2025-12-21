@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectPool
   amountToPool: 100
-  bulletToPool: {fileID: 7187951364459162667, guid: bfeabef838d024f48b7fd2ca4e2cb3b9, type: 3}
+  bulletToPool: {fileID: 5428018287150303765, guid: edfd0e5e91ec5ea42abff9319123074e, type: 3}

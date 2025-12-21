@@ -15,38 +15,50 @@ MonoBehaviour:
   duration: 5
   bulletSpawnerConfigs:
   - spawnerId: 0
+    bulletKind: 1
+    bulletSpawnerType: 0
+    useBurst: 1
+    fireDuration: 1.5
+    pauseDuration: 0.75
+    rotationSpeed: 66
+    sineAmplitude: 0
+    sineFrequency: 0
+    bulletSpeed: 2
+    bulletLifeTime: 7
+    fireRate: 0.5
+  - spawnerId: 2
+    bulletKind: 1
+    bulletSpawnerType: 0
+    useBurst: 1
+    fireDuration: 1.5
+    pauseDuration: 0.75
+    rotationSpeed: -66
+    sineAmplitude: 0
+    sineFrequency: 0
+    bulletSpeed: 2
+    bulletLifeTime: 7
+    fireRate: 1
+  - spawnerId: 1
     bulletKind: 0
     bulletSpawnerType: 0
     useBurst: 1
-    fireDuration: 1
-    pauseDuration: 0.5
-    rotationSpeed: 100
+    fireDuration: 1.5
+    pauseDuration: 0.75
+    rotationSpeed: -66
     sineAmplitude: 0
     sineFrequency: 0
-    bulletSpeed: 3
-    bulletLifeTime: 3
-    fireRate: 0.2
-  - spawnerId: 1
-    bulletKind: 1
-    bulletSpawnerType: 2
-    useBurst: 1
-    fireDuration: 2
-    pauseDuration: 0.5
-    rotationSpeed: 0
-    sineAmplitude: 45
-    sineFrequency: 10
-    bulletSpeed: 3
-    bulletLifeTime: 3
-    fireRate: 0.1
+    bulletSpeed: 2
+    bulletLifeTime: 7
+    fireRate: 1
   - spawnerId: 3
-    bulletKind: 1
+    bulletKind: 0
     bulletSpawnerType: 0
     useBurst: 1
-    fireDuration: 2
-    pauseDuration: 0.5
-    rotationSpeed: -100
+    fireDuration: 1.5
+    pauseDuration: 0.75
+    rotationSpeed: 66
     sineAmplitude: 0
     sineFrequency: 0
-    bulletSpeed: 4
-    bulletLifeTime: 3
-    fireRate: 0.1
+    bulletSpeed: 2
+    bulletLifeTime: 7
+    fireRate: 1
