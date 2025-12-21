@@ -15,13 +15,14 @@ MonoBehaviour:
   duration: 10
   bulletSpawnerConfigs:
   - spawnerId: 10
+    bulletKind: 0
     bulletSpawnerType: 1
     useBurst: 1
-    fireDuration: 2
-    pauseDuration: 0.5
+    fireDuration: 1.5
+    pauseDuration: 0.75
     rotationSpeed: 0
     sineAmplitude: 0
     sineFrequency: 0
     bulletSpeed: 3
-    bulletLifeTime: 3
-    fireRate: 0.3
+    bulletLifeTime: 10
+    fireRate: 1

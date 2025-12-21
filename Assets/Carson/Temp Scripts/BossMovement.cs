@@ -9,6 +9,7 @@ public class BossMovement : MonoBehaviour
     public float speed = 2f;
     public static event System.Action OnBossCenter;
     BossCore bossCore;
+    [SerializeField] GameObject boss;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,12 +28,19 @@ public class BossMovement : MonoBehaviour
     public void Teleport()
     {
         int teleportLocation = Random.Range(0, teleportPositions.Length);
-        bossRb.position = teleportPositions[teleportLocation].position;
+        //bossRb.position = teleportPositions[teleportLocation].position;
+        boss.transform.position = teleportPositions[teleportLocation].position;
+        Debug.Log("Teleporting to: " + teleportPositions[teleportLocation].position);
         bossRb.GetComponent<Animator>().ResetTrigger("Teleport");
+        Debug.Log("After teleport: " + bossRb.position);
         bossRb.GetComponent<Animator>().SetTrigger("Shoot");
         bossCore.TeleportShoot();
         
         
+    }
+    void LateUpdate()
+    {
+        Debug.Log("LateUpdate pos: " + transform.position);
     }
 
     public void returnToCenter()

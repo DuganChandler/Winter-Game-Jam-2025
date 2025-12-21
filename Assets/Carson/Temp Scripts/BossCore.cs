@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Collections;
 using UnityEngine;
 
 public class BossCore : Entity
@@ -29,6 +30,18 @@ public class BossCore : Entity
     float currentChaseTime;
     [SerializeField] float maxChaseTime;    
     bool frozen;
+    public bool freezeFrame;
+    public bool attacking = false;
+    bool inFront;
+    bool dead = false;
+    int newAttacks;
+    [SerializeField] int uniqueAttacks;
+    int newShots;
+    int chaseCount;
+    int teleporCount;
+    [SerializeField] BossBulletHellManager bossBulletHellManager;
+    bool phaseChanging;
+    bool startTriggered;
 
     void OnEnable()
     {
@@ -47,30 +60,52 @@ public class BossCore : Entity
         //player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
         //transform = GetComponent<Transform>();
+        newAttacks = 0;
+        newShots = 0;
+        chaseCount = 0;
+        teleporCount = 0;
+        freezeFrame = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         if (currentHealth <= proneThreshold)
         {
             Debug.Log("wow");
             StartCoroutine(Prone());
+            animator.speed = 1;
             proneThreshold = (int)currentHealth - proneDamage;
 
         }
-        if (currentHealth <= 0)
+        if (!dead)
         {
-            onDeath();
-        }
+            if(newAttacks >= uniqueAttacks)
+            {
+                phaseChanging = true;
+                animator.SetTrigger("Center");
+                Debug.Log("Change Phase");
+            }
         if (!frozen)
         {
             Vector3 direction = player.transform.position - transform.position;
             direction.y = 0f;
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction), 50 * Time.fixedDeltaTime);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction), 50 * Time.fixedDeltaTime); 
         }
+        Vector3 toTarget = (player.position - transform.position).normalized;
+    		
+    	if (Vector3.Dot(toTarget, transform.forward) > 0) {
+    		//Debug.Log("Target is in front of this game object.");
+            inFront = true;
+    	} else {
+    		//Debug.Log("Target is not in front of this game object.");
+            inFront = false;
+    	}
 
-        if (!animator.GetBool("Prone"))
+            if (startTriggered)
+            {
+                if (!animator.GetBool("Prone") || !phaseChanging)
         {
             currentChaseTime += Time.deltaTime;
             if (currentChaseTime >= maxChaseTime)
@@ -78,6 +113,7 @@ public class BossCore : Entity
                 rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
                 animator.SetBool("Chase", false);
                 frozen = false;
+                attacking = false;
                 int attackChoice = Random.Range(3,0);
                 
                 switch (attackChoice)
@@ -86,24 +122,51 @@ public class BossCore : Entity
                         animator.SetTrigger("Shoot");
                         OnAttackChange?.Invoke();
                         frozen = true;
+                        attacking = true;
+                        
+                        if(newShots<= bossBulletHellManager.GetPhases().Count)
+                            {
+                                newAttacks++;
+                            }
+                        newShots++;
                         Debug.Log("shoot");
                         break;
                     case 2: 
                         animator.SetTrigger("Teleport");
                         //OnAttackChange?.Invoke();
+                        
+                        if(teleporCount <= 2)
+                            {
+                                newAttacks++;
+                            }
+                        teleporCount++;
                         Debug.Log("teleport");
                         break;
                     case 3: 
                         animator.SetBool("Chase", true);
                         OnDeactivateBullets?.Invoke();
+                        if(chaseCount < 1)
+                            {
+                                newAttacks++;
+                            }
+                        chaseCount++;
                         Debug.Log("chase");
                         break;
                         
                 }
                 //OnAttackChange?.Invoke();
                 currentChaseTime = 0;
+                Debug.Log("attacks: "+newAttacks);
             }
         }
+            }
+        if (GameManager.Instance.GameState == GameState.Gameplay)
+        {
+            startTriggered = true;
+            
+        }
+        
+    }
 
         
         /*int attackChoice = Random.Range(5,0);
@@ -130,9 +193,28 @@ public class BossCore : Entity
         }*/
 
     }
-    void onDeath()
+    public override void Damage(float amount)
     {
-        boss.SetActive(false);
+        if(freezeFrame)
+        {
+            currentHealth -= amount * 4;
+            Debug.Log("Freeze Hit");
+        }else if(attacking && inFront || animator.GetBool("Prone"))
+        {
+            currentHealth -= amount *3;
+            Debug.Log("CRIT");
+        }else if (!inFront)
+        {
+            currentHealth -= amount;
+            Debug.Log("Back Hit");
+        }
+        
+        if (currentHealth <= 0)
+        {
+            animator.SetTrigger("Death");
+            dead = true;
+            //Die();
+        }
     }
     public void LineBullet()
     {
@@ -182,20 +264,29 @@ public class BossCore : Entity
         // timer = 0 and pause
         currentChaseTime = 0;
         frozen = true;
-        //rb.constraints = RigidbodyConstraints.FreezeAll;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
         yield return new WaitForSeconds(10);
 
         animator.SetBool("Prone",false);
-        //rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
-        frozen = false;
+        //frozen = false;
+    }
+    public void ChangePhase()
+    {
+        newAttacks = 0;
+        newShots = 0;
+        chaseCount = 0;
+        teleporCount = 0;
         OnPhaseChange?.Invoke();
+        phaseChanging = false;
     }
     private IEnumerator Freeze()
     {
         animator.speed = 0;
         OnDeactivateBullets?.Invoke();
         frozen = true;
+        freezeFrame = true;
         rb.constraints = RigidbodyConstraints.FreezeAll;
         // bullet manager deactivate
         // timer = 0 and pause
@@ -204,7 +295,8 @@ public class BossCore : Entity
         rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
         animator.speed = 1;
-        frozen = false;
+        //frozen = false;
+        freezeFrame = false;
     }
     void HandleMeterFull()
     {
@@ -224,6 +316,10 @@ public class BossCore : Entity
         frozen = true;
         rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
         OnAttackChange?.Invoke();
+    }
+    public void SetFrozen(bool value)
+    {
+        frozen = value;
     }
 
 }

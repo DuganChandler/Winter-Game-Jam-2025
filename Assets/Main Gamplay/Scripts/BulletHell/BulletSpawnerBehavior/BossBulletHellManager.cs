@@ -80,4 +80,8 @@ public class BossBulletHellManager : MonoBehaviour
         }
 
     }
+    public List<BulletPhase> GetPhases()
+    {
+        return phases;
+    }
 }
