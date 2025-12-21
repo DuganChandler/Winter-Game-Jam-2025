@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4604a68a96fa9a24e89fa49b164af4e5
+guid: 365b6118818460c4d9c36eb5a445e051
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -31,11 +31,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Roar
+      name: Run
       takeName: Scene
       internalID: -623603649343465320
       firstFrame: 1
-      lastFrame: 30
+      lastFrame: 13
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
