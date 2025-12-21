@@ -6,11 +6,13 @@ public enum BulletKind
     UnBreakable
 }
 
-public class Bullet : MonoBehaviour 
+public class Bullet : MonoBehaviour, IDamagable
 {
     private float lifeTime;
     private float speed;
     private float rotation;
+
+    private float hp;
 
     private float timer;
 
@@ -39,5 +41,14 @@ public class Bullet : MonoBehaviour
     private void MoveBullet()
     {
         transform.position += speed * Time.deltaTime * transform.forward;
+    }
+
+    public void Damage(float amount)
+    {
+        if (!IsBreakable) return;
+
+        hp -= amount;
+
+        if (hp <= 0) gameObject.SetActive(false);
     }
 }

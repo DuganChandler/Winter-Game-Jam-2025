@@ -42,7 +42,7 @@ public class BulletSpawner : MonoBehaviour {
     [SerializeField] private BulletPool unbreakablePool;
     [SerializeField] private BulletPool breakablePool;
 
-    [SerializeField] private BulletKind bulletKind;
+    private BulletKind bulletKind;
 
     private BulletSpawnerType bulletSpawnerType;
 
@@ -109,6 +109,9 @@ public class BulletSpawner : MonoBehaviour {
     {
         // type
         bulletSpawnerType = config.BulletSpawnerType;
+
+        // breakable or not
+        bulletKind = config.BulletKind;
 
         // burst
         useBurst = config.UseBurst; 
