@@ -34,13 +34,17 @@ public class Player : Entity
         selfieAction = m_playerInput.actions["Selfie"];
 
         GameManager.Instance.OnGameStateChanged += OnGameStateChanged;
-        OnGameStateChanged(GameManager.Instance.GameState);
+        
     }
 
     private void Start()
     {
-        OnPlayerHealthChanged?.Invoke(currentHealth, maxHealth);
-        m_playerInput.actions.Enable();
+        OnGameStateChanged(GameManager.Instance.GameState);
+        OnPlayerHealthChanged?.Invoke(currentHealth, maxHealth); 
+    }
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnGameStateChanged -= OnGameStateChanged;
     }
 
     private void OnEnable()
