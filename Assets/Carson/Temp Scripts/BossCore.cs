@@ -1,10 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
-public class BossCore : MonoBehaviour
+public class BossCore : Entity
 {
-    [SerializeField] int maxHealth;
-    [SerializeField] int currentHealth;
+    /*[SerializeField] int maxHealth;
+    [SerializeField] int currentHealth;*/
     [SerializeField] int proneDamage;
     int proneThreshold;
 
@@ -19,9 +19,16 @@ public class BossCore : MonoBehaviour
     bool cardinalActive = false;
 
     public static event System.Action OnPhaseChange;
-    public static event System.Action OnBossProne;
-    Transform player;
+    public static event System.Action OnDeactivateBullets;
+    public static event System.Action OnBossRoar;
+    public static event System.Action OnAttackChange;
+    [SerializeField] Transform player;
     Rigidbody rb;
+    [SerializeField] Transform transform;
+    int attackCount;
+    float currentChaseTime;
+    [SerializeField] float maxChaseTime;    
+    bool frozen;
 
     void OnEnable()
     {
@@ -35,10 +42,11 @@ public class BossCore : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        proneThreshold = maxHealth - proneDamage;
+        proneThreshold = (int)maxHealth - proneDamage;
         animator = GetComponent<Animator>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        //player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
+        //transform = GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -46,16 +54,81 @@ public class BossCore : MonoBehaviour
     {
         if (currentHealth <= proneThreshold)
         {
+            Debug.Log("wow");
             StartCoroutine(Prone());
+            proneThreshold = (int)currentHealth - proneDamage;
 
         }
         if (currentHealth <= 0)
         {
             onDeath();
         }
-        /*Vector3 direction = (player.position - rb.position).normalized;
-        Quaternion lookRot = Quaternion.LookRotation(direction);
-        rb.rotation = lookRot;  */
+        if (!frozen)
+        {
+            Vector3 direction = player.transform.position - transform.position;
+            direction.y = 0f;
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction), 50 * Time.fixedDeltaTime);
+        }
+
+        if (!animator.GetBool("Prone"))
+        {
+            currentChaseTime += Time.deltaTime;
+            if (currentChaseTime >= maxChaseTime)
+            {
+                rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+                animator.SetBool("Chase", false);
+                frozen = false;
+                int attackChoice = Random.Range(3,0);
+                
+                switch (attackChoice)
+                {
+                    case 1: 
+                        animator.SetTrigger("Shoot");
+                        OnAttackChange?.Invoke();
+                        frozen = true;
+                        Debug.Log("shoot");
+                        break;
+                    case 2: 
+                        animator.SetTrigger("Teleport");
+                        //OnAttackChange?.Invoke();
+                        Debug.Log("teleport");
+                        break;
+                    case 3: 
+                        animator.SetBool("Chase", true);
+                        OnDeactivateBullets?.Invoke();
+                        Debug.Log("chase");
+                        break;
+                        
+                }
+                //OnAttackChange?.Invoke();
+                currentChaseTime = 0;
+            }
+        }
+
+        
+        /*int attackChoice = Random.Range(5,0);
+        //Debug.Log(attackChoice);
+        switch (attackChoice)
+        {
+            case 1: 
+                animator.SetBool("Chase", true);
+                break;
+            case 2: 
+                animator.SetTrigger("Teleport");
+                break;
+            /*case 3: 
+                animator.SetTrigger("Line");
+                break;
+            case 4: 
+                animator.SetTrigger("Cone");
+                break;
+            case 5: 
+                animator.SetTrigger("Cardinal");
+                break;
+            default:
+                break;
+        }*/
+
     }
     void onDeath()
     {
@@ -103,17 +176,54 @@ public class BossCore : MonoBehaviour
     private IEnumerator Prone()
     {
         animator.SetBool("Prone",true);
-        OnBossProne?.Invoke();
-        
+        animator.SetTrigger("ProneTrigger");
+        OnDeactivateBullets?.Invoke();
+        // bullet manager deactivate
+        // timer = 0 and pause
+        currentChaseTime = 0;
+        frozen = true;
+        //rb.constraints = RigidbodyConstraints.FreezeAll;
         yield return new WaitForSeconds(10);
 
         animator.SetBool("Prone",false);
-        proneThreshold = currentHealth - proneDamage;
+        //rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+
+        frozen = false;
         OnPhaseChange?.Invoke();
+    }
+    private IEnumerator Freeze()
+    {
+        animator.speed = 0;
+        OnDeactivateBullets?.Invoke();
+        frozen = true;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+        // bullet manager deactivate
+        // timer = 0 and pause
+        currentChaseTime = 0;
+        yield return new WaitForSeconds(10);
+        rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+
+        animator.speed = 1;
+        frozen = false;
     }
     void HandleMeterFull()
     {
         Debug.Log("Meter is full!");
-        StartCoroutine(Prone());
+        StartCoroutine(Freeze());
     }
+    void onRoar()
+    {
+        OnBossRoar?.Invoke();
+    }
+
+
+
+    //add timer
+    public void TeleportShoot()
+    {
+        frozen = true;
+        rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
+        OnAttackChange?.Invoke();
+    }
+
 }
