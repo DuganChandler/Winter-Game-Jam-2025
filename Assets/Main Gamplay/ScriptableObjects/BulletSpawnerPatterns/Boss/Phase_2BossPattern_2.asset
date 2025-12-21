@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 136eff2e8b4374e4c8c8c72a76e95629, type: 3}
-  m_Name: Phase_1BossPattern_3
+  m_Name: Phase_2BossPattern_2
   m_EditorClassIdentifier: Assembly-CSharp::BulletPatternAsset
   duration: 10
   bulletSpawnerConfigs:
-  - spawnerId: 8
-    bulletSpawnerType: 0
+  - spawnerId: 10
+    bulletKind: 0
+    bulletSpawnerType: 1
     useBurst: 1
-    fireDuration: 2
-    pauseDuration: 0.5
-    rotationSpeed: 50
+    fireDuration: 1.5
+    pauseDuration: 0.75
+    rotationSpeed: 0
     sineAmplitude: 0
     sineFrequency: 0
     bulletSpeed: 3
-    bulletLifeTime: 3
-    fireRate: 0.3
+    bulletLifeTime: 10
+    fireRate: 0.9
