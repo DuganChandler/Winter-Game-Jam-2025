@@ -11,13 +11,18 @@ public class MainMenuController : MonoBehaviour
     void OnEnable()
     {
         gameplayPanel.SetActive(false);
-        SoundManager.Instance.PlayMusic("music");
+        //SoundManager.Instance.PlayMusic("music");
         GameManager.Instance.GameState = GameState.MainMenu;
         if (GameManager.Instance.Restart)
         {
             StartGame();
             GameManager.Instance.Restart = false;
         }
+    }
+
+    public void Start()
+    {
+        SoundManager.Instance.PlayMusic("music");
     }
 
     public void StartGame()

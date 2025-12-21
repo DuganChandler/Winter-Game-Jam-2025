@@ -31,12 +31,14 @@ public class BossChase : StateMachineBehaviour
         Vector3 target = new Vector3(player.position.x, rb.position.y,player.position.z);
         Vector3 newPos = Vector3.MoveTowards(rb.position,target,speed * Time.fixedDeltaTime);
         rb.MovePosition(newPos);
+        SoundManager.Instance.PlaySound("clop");
 
-        
+
 
         if (Vector3.Distance(player.position, rb.position) <= attackRange)
         {
             animator.SetTrigger("Melee");
+            SoundManager.Instance.PlaySound("slam");
         }
     }
 

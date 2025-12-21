@@ -216,6 +216,7 @@ public class BossCore : Entity
         if (currentHealth <= 0 && !dead)
         {
             animator.SetTrigger("Death");
+            SoundManager.Instance.PlaySound("krampus_death");
             dead = true;
             GameManager.Instance.GameState = GameState.Win;
             //Die();
@@ -299,6 +300,7 @@ public class BossCore : Entity
         // timer = 0 and pause
         currentChaseTime = 0;
         OnFreeze?.Invoke(freezeTime);
+        SoundManager.Instance.PlaySound("ice_impact");
         yield return new WaitForSeconds(freezeTime);
         rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
@@ -314,6 +316,7 @@ public class BossCore : Entity
     }
     void onRoar()
     {
+        SoundManager.Instance.PlaySound("krampus_roar");
         OnBossRoar?.Invoke();
     }
 
