@@ -23,9 +23,9 @@ MonoBehaviour:
     rotationSpeed: -66
     sineAmplitude: 0
     sineFrequency: 0
-    bulletSpeed: 3
+    bulletSpeed: 4
     bulletLifeTime: 10
-    fireRate: 1
+    fireRate: 0.5
   - spawnerId: 2
     bulletKind: 1
     bulletSpawnerType: 0
@@ -35,9 +35,9 @@ MonoBehaviour:
     rotationSpeed: 66
     sineAmplitude: 0
     sineFrequency: 0
-    bulletSpeed: 2
+    bulletSpeed: 4
     bulletLifeTime: 10
-    fireRate: 1
+    fireRate: 0.5
   - spawnerId: 1
     bulletKind: 0
     bulletSpawnerType: 2
@@ -47,9 +47,9 @@ MonoBehaviour:
     rotationSpeed: 0
     sineAmplitude: 45
     sineFrequency: 3
-    bulletSpeed: 2
+    bulletSpeed: 4
     bulletLifeTime: 10
-    fireRate: 1
+    fireRate: 0.5
   - spawnerId: 3
     bulletKind: 0
     bulletSpawnerType: 2
@@ -59,6 +59,6 @@ MonoBehaviour:
     rotationSpeed: 0
     sineAmplitude: -45
     sineFrequency: 2
-    bulletSpeed: 2
+    bulletSpeed: 4
     bulletLifeTime: 10
-    fireRate: 1
+    fireRate: 0.5
