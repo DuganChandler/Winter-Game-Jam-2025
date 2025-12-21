@@ -25,6 +25,7 @@ public class BossMovement : MonoBehaviour
     {
         int teleportLocation = Random.Range(0, teleportPositions.Length);
         bossRb.position = teleportPositions[teleportLocation].position;
+        bossRb.GetComponent<Animator>().SetTrigger("Shoot");
     }
 
     public void returnToCenter()

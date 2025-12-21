@@ -284,7 +284,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &126855911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,6 +352,59 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1074122648}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &406582624
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 406582626}
+  - component: {fileID: 406582625}
+  m_Layer: 0
+  m_Name: boss bullet manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &406582625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406582624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf98280734a0cbf49b86c121cb899406, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossBulletHellManager
+  phases:
+  - bulletPatternAssets:
+    - {fileID: 11400000, guid: e865077a69b0869408792a2b5d26e5b7, type: 2}
+    - {fileID: 11400000, guid: f2eb06317be369b4582e7bf3839e41e6, type: 2}
+    - {fileID: 11400000, guid: 494704ade67106442939f7f4d6a5312b, type: 2}
+  bulletSpawners:
+  - {fileID: 1697573863}
+  - {fileID: 1173760652}
+  - {fileID: 126855911}
+--- !u!4 &406582626
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406582624}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.29047, y: 0, z: 6.71408}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &555116598
 GameObject:
@@ -647,6 +700,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BulletHellManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2903293068542863584, guid: 5f38de460da866c42a4191da4d4ac713, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6194411825039803402, guid: 5f38de460da866c42a4191da4d4ac713, type: 3}
       propertyPath: 'bulletSpawners.Array.data[0]'
       value: 
@@ -876,7 +933,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1173760652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -889,7 +946,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bf7dc39a94d6f84f9f72d45cfff0347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletSpawner
-  spawnerId: 8
+  spawnerId: 9
   spawnPoints:
   - {fileID: 196732018}
   - {fileID: 2137996134}
@@ -1282,6 +1339,7 @@ MonoBehaviour:
   lineSpawner: {fileID: 1697573862}
   coneSpawner: {fileID: 1173760651}
   cardinalSpawner: {fileID: 126855910}
+  maxChaseTime: 10
 --- !u!95 &1300549807
 Animator:
   serializedVersion: 7
@@ -1832,7 +1890,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1697573863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1845,7 +1903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bf7dc39a94d6f84f9f72d45cfff0347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletSpawner
-  spawnerId: 8
+  spawnerId: 10
   spawnPoints:
   - {fileID: 1315875703}
   bulletSpawnerPivot: {fileID: 1222378780}
@@ -2269,3 +2327,4 @@ SceneRoots:
   - {fileID: 638291359}
   - {fileID: 1215551608}
   - {fileID: 861506412}
+  - {fileID: 406582626}

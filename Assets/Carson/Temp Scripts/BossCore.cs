@@ -19,11 +19,15 @@ public class BossCore : MonoBehaviour
     bool cardinalActive = false;
 
     public static event System.Action OnPhaseChange;
-    public static event System.Action OnBossProne;
+    public static event System.Action OnDeactivateBullets;
     public static event System.Action OnBossRoar;
+    public static event System.Action OnAttackChange;
     Transform player;
     Rigidbody rb;
     Transform transform;
+    int attackCount;
+    float currentChaseTime;
+    [SerializeField] float maxChaseTime;    
 
     void OnEnable()
     {
@@ -59,6 +63,63 @@ public class BossCore : MonoBehaviour
         Vector3 direction = player.transform.position - transform.position;
         direction.y = 0f;
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction), 50 * Time.fixedDeltaTime);
+
+        if (!animator.GetBool("Prone"))
+        {
+            currentChaseTime += Time.deltaTime;
+            if (currentChaseTime >= maxChaseTime)
+            {
+                animator.SetBool("Chase", false);
+                int attackChoice = Random.Range(3,0);
+                
+                switch (attackChoice)
+                {
+                    case 1: 
+                        animator.SetTrigger("Shoot");
+                        OnAttackChange?.Invoke();
+                        Debug.Log("shoot");
+                        break;
+                    case 2: 
+                        animator.SetTrigger("Teleport");
+                        OnAttackChange?.Invoke();
+                        Debug.Log("teleport");
+                        break;
+                    case 3: 
+                        animator.SetBool("Chase", true);
+                        OnDeactivateBullets?.Invoke();
+                        Debug.Log("chase");
+                        break;
+                        
+                }
+                //OnAttackChange?.Invoke();
+                currentChaseTime = 0;
+            }
+        }
+
+        
+        /*int attackChoice = Random.Range(5,0);
+        //Debug.Log(attackChoice);
+        switch (attackChoice)
+        {
+            case 1: 
+                animator.SetBool("Chase", true);
+                break;
+            case 2: 
+                animator.SetTrigger("Teleport");
+                break;
+            /*case 3: 
+                animator.SetTrigger("Line");
+                break;
+            case 4: 
+                animator.SetTrigger("Cone");
+                break;
+            case 5: 
+                animator.SetTrigger("Cardinal");
+                break;
+            default:
+                break;
+        }*/
+
     }
     void onDeath()
     {
@@ -106,9 +167,9 @@ public class BossCore : MonoBehaviour
     private IEnumerator Prone()
     {
         animator.SetBool("Prone",true);
-        OnBossProne?.Invoke();
+        OnDeactivateBullets?.Invoke();
         // bullet manager deactivate
-        
+        // timer = 0 and pause
         yield return new WaitForSeconds(10);
 
         animator.SetBool("Prone",false);
@@ -124,4 +185,13 @@ public class BossCore : MonoBehaviour
     {
         OnBossRoar?.Invoke();
     }
+
+
+
+    //add timer
+    void Timer()
+    {
+        
+    }
+
 }
