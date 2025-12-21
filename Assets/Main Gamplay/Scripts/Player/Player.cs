@@ -106,4 +106,11 @@ public class Player : Entity
         m_animator.Play("death");
         OnPlayerDeath?.Invoke();
     }
+    public void DoVictoryDance()
+    {
+        m_playerInput.actions.Disable();
+        m_playerMovement.enabled = false;
+        m_playerAttack.enabled = false;
+        m_animator.Play("dance");
+    }
 }
