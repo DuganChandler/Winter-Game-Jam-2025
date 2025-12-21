@@ -7,6 +7,7 @@ public class BossMovement : MonoBehaviour
     [SerializeField] Transform centerPosition;
     Transform player;
     public float speed = 2f;
+    public static event System.Action OnBossCenter;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -29,5 +30,6 @@ public class BossMovement : MonoBehaviour
     public void returnToCenter()
     {
         bossRb.position = centerPosition.position;
+        OnBossCenter?.Invoke();
     }
 }
