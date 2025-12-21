@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -16,27 +17,33 @@ public class UIManager : MonoBehaviour
         Player.OnPlayerDeath -= OnPlayerDeath;
     }
     private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
+    { 
+        if (Input.GetKeyDown(KeyCode.Escape) && GameManager.Instance.GameState == GameState.Gameplay)
         {
             TogglePause();
         }
     }
     public void RestartGame()
     {
+        // sets the restart falg to treu to immediatly start the game in MainMenuController
+        GameManager.Instance.Restart = true;
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
     }
     public void QuitGame()
     {
-        SceneManager.LoadSceneAsync("Title");
+        // in case it becomes true accidently idk..
+        GameManager.Instance.Restart = false;
+        SceneManager.LoadSceneAsync("MainMenu");
     }
     public void PauseGame()
     {
+        GameManager.Instance.GameState = GameState.Pause;
         Time.timeScale = 0f;
         pauseMenu.SetActive(true);
     }
     public void UnPauseGame()
     {
+        GameManager.Instance.GameState = GameState.Gameplay;
         Time.timeScale = 1f;
         pauseMenu.SetActive(false);
     }
@@ -53,6 +60,7 @@ public class UIManager : MonoBehaviour
     }
     private void OnPlayerDeath()
     {
+        GameManager.Instance.GameState = GameState.Gameover;
         StartCoroutine(DeathCoroutine());
     }
     private IEnumerator DeathCoroutine()
