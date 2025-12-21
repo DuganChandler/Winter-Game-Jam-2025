@@ -16,14 +16,14 @@ public class BossBulletHellManager : MonoBehaviour
     {
         BossCore.OnAttackChange += NextPattern;
         BossCore.OnPhaseChange += NextPhase;
-        BossCore.OnDeactivateBullets += DeactivateSpawners;
+        BossCore.OnBossDeactivateBullets += DeactivateSpawners;
     }
 
     void OnDisable()
     {
         BossCore.OnAttackChange -= NextPattern;
         BossCore.OnPhaseChange -= NextPhase;
-        BossCore.OnDeactivateBullets -= DeactivateSpawners;
+        BossCore.OnBossDeactivateBullets -= DeactivateSpawners;
     }
 
     void Awake()
