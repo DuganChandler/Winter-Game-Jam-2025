@@ -39,7 +39,10 @@ public class BulletSpawner : MonoBehaviour {
     [SerializeField] private TargetManager targetManager;
 
     [Header("Pooling")]
-    [SerializeField] private BulletPool bulletPool;
+    [SerializeField] private BulletPool unbreakablePool;
+    [SerializeField] private BulletPool breakablePool;
+
+    [SerializeField] private BulletKind bulletKind;
 
     private BulletSpawnerType bulletSpawnerType;
 
@@ -130,7 +133,8 @@ public class BulletSpawner : MonoBehaviour {
     public void Disable()
     {
         active = false;
-        bulletPool.DeactivatePooledObjects();
+        unbreakablePool.DeactivatePooledObjects();
+        breakablePool.DeactivatePooledObjects();
     }
 
     private void FireBullet() 
@@ -138,12 +142,13 @@ public class BulletSpawner : MonoBehaviour {
         {
             foreach(Transform spawnPoint in spawnPoints)
             {
-                GameObject bulletObj = bulletPool.GetPooledObject();
+                GameObject bulletObj = bulletKind == BulletKind.UnBreakable ? unbreakablePool.GetPooledObject() : breakablePool.GetPooledObject();
 
                 bulletObj.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
                 Bullet bullet = bulletObj.GetComponent<Bullet>();
                 bullet.Speed = bulletSpeed;
                 bullet.LifeTime = bulletLifeTime;
+                bullet.IsBreakable = bulletKind == BulletKind.Breakable;
             }
         }
     }

@@ -19,6 +19,7 @@ public class Player : Entity
     // Input Events
     private InputAction selfieAction;
     public bool CanSelfie = true;
+    public bool IFrameActive = false;
 
     protected new void Awake()
     {
@@ -89,6 +90,7 @@ public class Player : Entity
     }
     public override void Damage(float amount)
     {
+        if (IFrameActive) return;
         currentHealth -= amount;
         OnPlayerHealthChanged?.Invoke(currentHealth, maxHealth);
         if (currentHealth <= 0)

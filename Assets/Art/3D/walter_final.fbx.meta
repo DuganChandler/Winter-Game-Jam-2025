@@ -83,7 +83,12 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: walter_final(Clone)
+      parentName: 
+      position: {x: 0.18372066, y: 5.9876294, z: 0.032884106}
+      rotation: {x: 0.53213894, y: 0.46564808, z: 0.53213894, w: -0.46564808}
+      scale: {x: 1.0868315, y: 1.0868315, z: 0.92662656}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
