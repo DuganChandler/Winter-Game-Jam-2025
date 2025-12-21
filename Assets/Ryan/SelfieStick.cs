@@ -12,6 +12,7 @@ public class SelfieStick : MonoBehaviour
     private Camera m_selfieCamera;
     public static event System.Action<float> OnTargetVisible;
     public static event System.Action OnMeterFull;
+    public static event System.Action OnMeterEmpty;
     private float detectionFillAmount;
     public bool IsSelfieMode = false;
     public bool TakenPhoto = false;
@@ -43,6 +44,7 @@ public class SelfieStick : MonoBehaviour
             if (detectionFillAmount < 0f)
             {
                 detectionFillAmount = 0f;
+                OnMeterEmpty?.Invoke();
                 TakenPhoto = false;
             }
             OnTargetVisible?.Invoke(detectionFillAmount / detectionMaxFill);

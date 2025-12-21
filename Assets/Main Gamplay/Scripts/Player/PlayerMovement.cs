@@ -113,6 +113,7 @@ public class PlayerMovement : MonoBehaviour
         int predicate = m_backstep_when_stationary && !_isMoving ? -1 : 1;
         Vector3 dodgeVelocity = predicate * _facingDirection * m_dodgeSpeed;
         m_animator.Play("dodge");
+        SoundManager.Instance.PlaySound("roll");
         m_rb.AddForce(dodgeVelocity, ForceMode.VelocityChange);
         StartCoroutine(OnDodgeEnd());
     }
