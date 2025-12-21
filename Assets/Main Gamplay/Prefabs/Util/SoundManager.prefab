@@ -192,7 +192,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97d6aa06fa5047c48b9e9c514ae37a61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundLibrary
-  sounds: []
+  sounds:
+  - soundName: clop
+    clip: {fileID: 8300000, guid: ba3aec1fc77f10540991335e01c6f3b2, type: 3}
+  - soundName: crit
+    clip: {fileID: 8300000, guid: 975ecefef95fce642aa13cced9cf4243, type: 3}
+  - soundName: ding
+    clip: {fileID: 8300000, guid: e1e27c77476ea90429816a7e3d78319b, type: 3}
+  - soundName: hit
+    clip: {fileID: 8300000, guid: bce4bc1e71abf5a4a95abded5c54d792, type: 3}
+  - soundName: ice_impact
+    clip: {fileID: 8300000, guid: ca5dc3033b429fc489d5a53071feebae, type: 3}
+  - soundName: krampus_death
+    clip: {fileID: 8300000, guid: f8efcdccd73ce7744b4c0a7b48f9e8f6, type: 3}
+  - soundName: krampus_hit
+    clip: {fileID: 8300000, guid: 03cad5c8252aee643959714aa2fbae77, type: 3}
+  - soundName: krampus_roar
+    clip: {fileID: 8300000, guid: f23cdbcde393aa44ebd17f15a8b44f02, type: 3}
+  - soundName: pillar_on
+    clip: {fileID: 8300000, guid: 092d3a88cc98ec94fbfb62fdee823332, type: 3}
+  - soundName: slam
+    clip: {fileID: 8300000, guid: 5ce8c3c3763be9f4291ff961117b4e52, type: 3}
+  - soundName: swing
+    clip: {fileID: 8300000, guid: 47261731337ba6e4ab8e57f892609029, type: 3}
+  - soundName: take_photo
+    clip: {fileID: 8300000, guid: ae9a8d6a23845734e8456a39e45d704a, type: 3}
+  - soundName: ui_bings
+    clip: {fileID: 8300000, guid: d81e6bd96fe6ecd4ebf15d1c245396dc, type: 3}
+  - soundName: walter_death
+    clip: {fileID: 8300000, guid: ffad1b3a4b6b2c14c96550409c923737, type: 3}
+  - soundName: walter_hit
+    clip: {fileID: 8300000, guid: 15bf818807ff8d841ad83bd86ed4161d, type: 3}
+  - soundName: weakend
+    clip: {fileID: 8300000, guid: 6c4a5c25715c4d546bab3cb63f32d856, type: 3}
+  - soundName: weakend
+    clip: {fileID: 8300000, guid: 6c4a5c25715c4d546bab3cb63f32d856, type: 3}
 --- !u!1 &9146048485015105499
 GameObject:
   m_ObjectHideFlags: 0
