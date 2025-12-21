@@ -21,7 +21,9 @@ public class GameManager : MonoBehaviour {
             return _Instance;
         } 
     }
+
     public event System.Action<GameState> OnGameStateChanged;
+
     private GameState m_gameState = GameState.MainMenu;
     public GameState GameState
     {
@@ -31,6 +33,7 @@ public class GameManager : MonoBehaviour {
         }
         set
         {
+            if (m_gameState == value) return; 
             m_gameState = value;
             OnGameStateChanged?.Invoke(m_gameState);
         }
