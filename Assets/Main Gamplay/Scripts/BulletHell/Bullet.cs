@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 
 public class Bullet : MonoBehaviour
 {
