@@ -3,13 +3,13 @@ using UnityEngine;
 public class Entity : MonoBehaviour, IDamagable
 {
     [SerializeField]
-    private float maxHealth = 10f;
-    private float currentHealth;
-    private void Awake()
+    protected float maxHealth = 10f;
+    protected float currentHealth;
+    protected void Awake()
     {
         currentHealth = maxHealth;
     }
-    public void Damage(float amount)
+    public virtual void Damage(float amount)
     {
         currentHealth -= amount;
         if (currentHealth <= 0)
@@ -17,7 +17,7 @@ public class Entity : MonoBehaviour, IDamagable
             Die();
         }
     }
-    private void Die()
+    protected virtual void Die()
     {
         // Handle entity death (e.g., play animation, disable object, etc.)
         Debug.Log($"{gameObject.name} has died.");
