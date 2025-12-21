@@ -1,5 +1,3 @@
-using System.Security.Cryptography;
-using NUnit.Framework;
 using UnityEngine;
 
 public enum BulletSpawnerType {
@@ -8,47 +6,75 @@ public enum BulletSpawnerType {
     SineWave
 }
 
+public enum BulletSpawnerOwner
+{
+    Boss,
+    Environment
+}
+
+public enum SpawnerId
+{
+    North,
+    East,
+    South,
+    West,
+    NorthEast,
+    NorthWest,
+    SouthEast,
+    SouthWest,
+    BossCardinal,
+    BossCone,
+    BossLine
+}
+
 public class BulletSpawner : MonoBehaviour {
-    [Header("Spawner Type")]
-    [SerializeField] private BulletSpawnerType bulletSpawnerType;
+    [Header("Identifier")]
+    [SerializeField] private SpawnerId spawnerId;
 
-    [Header("Targetting Config")]
-    [SerializeField] private TargetManager targetManager;
-
-    [Header("Burst Config")]
-    [SerializeField] private bool useBurst;
-    [SerializeField] private float fireDuration = 1.5f;
-    [SerializeField] private float pauseDuration = 0.5f;
-
-    [Header("Rotation Config")]
-    [SerializeField] private float rotationSpeed;
-
-    [Header("Sine Config")]
-    [SerializeField] private float sineAmplitude = 45f;
-    [SerializeField] private float sineFrequency = 1f;
-
-    [Header("Bullet Config")]
-    [SerializeField] private float bulletSpeed;
-    [SerializeField] private float bulletLifeTime;
-    [SerializeField] private float fireRate;
-    [SerializeField] private GameObject bullet;
-    [SerializeField] private BulletPool bulletPool;
-
-
-    [Header("Spawn Config")]
+    [Header("Spawning")]
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private Transform bulletSpawnerPivot;
 
+    [Header("Targetting")]
+    [SerializeField] private TargetManager targetManager;
+
+    [Header("Pooling")]
+    [SerializeField] private BulletPool bulletPool;
+
+    private BulletSpawnerType bulletSpawnerType;
+
+    private bool useBurst;
+    private float fireDuration = 1.5f;
+    private float pauseDuration = 0.5f;
+
+    private float rotationSpeed;
+
+    private float sineAmplitude = 45f;
+    private float sineFrequency = 1f;
+
+    private float bulletSpeed;
+    private float bulletLifeTime;
+    private float fireRate;
+
     private Vector3 rotationAxis = Vector3.up;
 
+    // rotate and sine timings
     private float timer = 0f;
     private float sineTimer;
 
+    // burst vals
     private bool isFiring = true;
     private float burstTimer = 0f;
 
+    // for pattern cycels
+    private bool active = false;
+
+    public SpawnerId SpawnerId { get => spawnerId; }
+
     void Update() 
     {
+        if (!active) return;
+
         HandleBurst();
         if (!isFiring) return;
 
@@ -74,6 +100,37 @@ public class BulletSpawner : MonoBehaviour {
             FireBullet();
             timer = 0;
         }
+    }
+
+    public void ApplyConfig(BulletSpawnerConfig config)
+    {
+        // type
+        bulletSpawnerType = config.BulletSpawnerType;
+
+        // burst
+        useBurst = config.UseBurst; 
+        fireDuration = config.FireDuration;
+        pauseDuration = config.PauseDuration; 
+
+        // spin 
+        rotationSpeed = config.RotationSpeed;
+
+        // sine
+        sineAmplitude = config.SineAmplitude;
+        sineFrequency = config.SineFrequency;
+
+        // bullet
+        bulletSpeed = config.BulletSpeed;
+        bulletLifeTime = config.BulletLifeTime;
+        fireRate = config.FireRate;
+
+        active = true;
+    }
+
+    public void Disable()
+    {
+        active = false;
+        bulletPool.DeactivatePooledObjects();
     }
 
     private void FireBullet() 
@@ -129,4 +186,5 @@ public class BulletSpawner : MonoBehaviour {
             burstTimer = 0f;
         }
     }
+
 }

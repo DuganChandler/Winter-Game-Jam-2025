@@ -42,4 +42,12 @@ public class BulletPool : MonoBehaviour
         tmp.SetActive(true);
         return tmp;
     }
+
+    public void DeactivatePooledObjects()
+    {
+        foreach (GameObject pooledBullet in pooledBullets)
+        {
+            pooledBullet.SetActive(false);
+        }
+    }
 }
