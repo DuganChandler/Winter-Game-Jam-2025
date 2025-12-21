@@ -75,6 +75,7 @@ public class BossCore : Entity
             currentChaseTime += Time.deltaTime;
             if (currentChaseTime >= maxChaseTime)
             {
+                rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
                 animator.SetBool("Chase", false);
                 frozen = false;
                 int attackChoice = Random.Range(3,0);
@@ -221,6 +222,7 @@ public class BossCore : Entity
     public void TeleportShoot()
     {
         frozen = true;
+        rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
         OnAttackChange?.Invoke();
     }
 
