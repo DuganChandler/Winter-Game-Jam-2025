@@ -41,6 +41,7 @@ public class BossCore : Entity
     int teleporCount;
     [SerializeField] BossBulletHellManager bossBulletHellManager;
     bool phaseChanging;
+    bool startTriggered;
 
     void OnEnable()
     {
@@ -69,6 +70,7 @@ public class BossCore : Entity
     // Update is called once per frame
     void Update()
     {
+        
         if (currentHealth <= proneThreshold)
         {
             Debug.Log("wow");
@@ -101,8 +103,9 @@ public class BossCore : Entity
             inFront = false;
     	}
 
-        
-        if (!animator.GetBool("Prone") || !phaseChanging)
+            if (startTriggered)
+            {
+                if (!animator.GetBool("Prone") || !phaseChanging)
         {
             currentChaseTime += Time.deltaTime;
             if (currentChaseTime >= maxChaseTime)
@@ -156,6 +159,13 @@ public class BossCore : Entity
                 Debug.Log("attacks: "+newAttacks);
             }
         }
+            }
+        if (GameManager.Instance.GameState == GameState.Gameplay)
+        {
+            startTriggered = true;
+            
+        }
+        
     }
 
         
