@@ -15,17 +15,19 @@ MonoBehaviour:
   duration: 5
   bulletSpawnerConfigs:
   - spawnerId: 0
+    bulletKind: 0
     bulletSpawnerType: 0
     useBurst: 1
-    fireDuration: 0.8
-    pauseDuration: 0.35
+    fireDuration: 1
+    pauseDuration: 0.5
     rotationSpeed: 100
     sineAmplitude: 0
     sineFrequency: 0
     bulletSpeed: 3
     bulletLifeTime: 3
-    fireRate: 0.1
+    fireRate: 0.2
   - spawnerId: 1
+    bulletKind: 1
     bulletSpawnerType: 2
     useBurst: 1
     fireDuration: 2
@@ -37,6 +39,7 @@ MonoBehaviour:
     bulletLifeTime: 3
     fireRate: 0.1
   - spawnerId: 3
+    bulletKind: 1
     bulletSpawnerType: 0
     useBurst: 1
     fireDuration: 2

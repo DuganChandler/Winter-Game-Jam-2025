@@ -6,6 +6,9 @@ public class BulletSpawnerConfig
     [Header("Associated Spawner")]
     [SerializeField] SpawnerId spawnerId;
 
+    [Header("Set Bullet Kind")]
+    [SerializeField] private BulletKind bulletKind;
+
     [Header("Spawner Type")]
     [SerializeField] private BulletSpawnerType bulletSpawnerType;
 
@@ -27,6 +30,8 @@ public class BulletSpawnerConfig
     [SerializeField] private float fireRate;
 
     public SpawnerId SpawnerId { get => spawnerId; }
+
+    public BulletKind BulletKind { get => bulletKind; }
 
     public BulletSpawnerType BulletSpawnerType { get => bulletSpawnerType; }
 
