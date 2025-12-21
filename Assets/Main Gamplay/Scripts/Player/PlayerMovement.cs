@@ -18,6 +18,9 @@ public class PlayerMovement : MonoBehaviour
     private float m_dodgeSpeed = 8f;
 
     [SerializeField]
+    private float m_dodgeCooldown = 0.4f;
+
+    [SerializeField]
     private bool m_backstep_when_stationary = true;
 
     // GameObjects References
@@ -84,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 _moveInput = moveAction.ReadValue<Vector2>();
         _isMoving = _moveInput != Vector2.zero;
         Vector3 targetVelocity = new Vector3(_moveInput.x * m_topMoveSpeed, m_rb.linearVelocity.y, _moveInput.y * m_topMoveSpeed);
-        m_rb.linearVelocity = Vector3.SmoothDamp(m_rb.linearVelocity, targetVelocity, ref velocity, 0.2f);
+        m_rb.linearVelocity = Vector3.SmoothDamp(m_rb.linearVelocity, targetVelocity, ref velocity, 0.1f);
 
         if (_isMoving)
         {
@@ -128,7 +131,7 @@ public class PlayerMovement : MonoBehaviour
         m_playerAttack.CanAttack = true;
 
         // Dodge CoolDown
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(m_dodgeCooldown);
         CanDodge = true;
     }
     private void Rotate()

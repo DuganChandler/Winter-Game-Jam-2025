@@ -8,7 +8,7 @@ public class HitRegion : MonoBehaviour
     public float DamageAmount { get => damageAmount; set => damageAmount = value; }
     public void OnTriggerEnter(Collider other)
     {
-        IDamagable damagable = other.GetComponentInParent<IDamagable>();
+        IDamagable damagable = other.GetComponent<IDamagable>();
         if (damagable != null)
         {
             damagable.Damage(damageAmount);
@@ -16,7 +16,7 @@ public class HitRegion : MonoBehaviour
     }
     public void OnCollisionEnter(Collision collision)
     {
-        IDamagable damagable = collision.gameObject.GetComponentInParent<IDamagable>();
+        IDamagable damagable = collision.gameObject.GetComponent<IDamagable>();
         if (damagable != null)
         {
             damagable.Damage(damageAmount);
