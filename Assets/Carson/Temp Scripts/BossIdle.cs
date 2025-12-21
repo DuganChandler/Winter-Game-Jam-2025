@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class BossIdle : StateMachineBehaviour
 {
+    //public static event System.Action OnLineAttack;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        
         int attackChoice = Random.Range(5,0);
         Debug.Log(attackChoice);
         switch (attackChoice)

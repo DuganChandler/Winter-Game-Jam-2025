@@ -20,8 +20,10 @@ public class BossCore : MonoBehaviour
 
     public static event System.Action OnPhaseChange;
     public static event System.Action OnBossProne;
+    public static event System.Action OnBossRoar;
     Transform player;
     Rigidbody rb;
+    Transform transform;
 
     void OnEnable()
     {
@@ -39,6 +41,7 @@ public class BossCore : MonoBehaviour
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
+        transform = GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -53,9 +56,9 @@ public class BossCore : MonoBehaviour
         {
             onDeath();
         }
-        /*Vector3 direction = (player.position - rb.position).normalized;
-        Quaternion lookRot = Quaternion.LookRotation(direction);
-        rb.rotation = lookRot;  */
+        Vector3 direction = player.transform.position - transform.position;
+        direction.y = 0f;
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction), 50 * Time.fixedDeltaTime);
     }
     void onDeath()
     {
@@ -104,6 +107,7 @@ public class BossCore : MonoBehaviour
     {
         animator.SetBool("Prone",true);
         OnBossProne?.Invoke();
+        // bullet manager deactivate
         
         yield return new WaitForSeconds(10);
 
@@ -115,5 +119,9 @@ public class BossCore : MonoBehaviour
     {
         Debug.Log("Meter is full!");
         StartCoroutine(Prone());
+    }
+    void onRoar()
+    {
+        OnBossRoar?.Invoke();
     }
 }

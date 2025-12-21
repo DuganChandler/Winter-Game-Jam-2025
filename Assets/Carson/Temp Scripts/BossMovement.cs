@@ -31,5 +31,6 @@ public class BossMovement : MonoBehaviour
     {
         bossRb.position = centerPosition.position;
         OnBossCenter?.Invoke();
+        //bullet manager. next
     }
 }

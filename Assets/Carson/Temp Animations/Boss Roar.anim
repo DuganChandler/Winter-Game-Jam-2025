@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Boss Idle
+  m_Name: Boss Roar
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,12 +21,12 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+      value: {fileID: 2100000, guid: f225b64ed5ba5244d87384b97f382541, type: 2}
     - time: 0.5
-      value: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
-    attribute: m_Mesh
+      value: {fileID: 2100000, guid: f225b64ed5ba5244d87384b97f382541, type: 2}
+    attribute: 'm_Materials.Array.data[0]'
     path: 
-    classID: 33
+    classID: 23
     script: {fileID: 0}
     flags: 2
   m_SampleRate: 60
@@ -38,16 +38,16 @@ AnimationClip:
     genericBindings:
     - serializedVersion: 2
       path: 0
-      attribute: 3757223753
+      attribute: 0
       script: {fileID: 0}
-      typeID: 33
-      customType: 41
+      typeID: 23
+      customType: 21
       isPPtrCurve: 1
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
-    - {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+    - {fileID: 2100000, guid: f225b64ed5ba5244d87384b97f382541, type: 2}
+    - {fileID: 2100000, guid: f225b64ed5ba5244d87384b97f382541, type: 2}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -72,4 +72,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.5
+    functionName: onRoar
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
