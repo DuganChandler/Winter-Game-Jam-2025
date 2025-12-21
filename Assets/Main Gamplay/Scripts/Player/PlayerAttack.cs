@@ -70,6 +70,7 @@ public class PlayerAttack : MonoBehaviour
             m_rb.linearVelocity = Vector3.zero;
             m_hitRegion.DamageAmount = m_attackDamage;
             m_animator.Play("slash");
+            SoundManager.Instance.PlaySound("swing");
             //m_hitRegion.gameObject.SetActive(true);
             _isAttacking = true;
             StartCoroutine(OnAttackEnd());

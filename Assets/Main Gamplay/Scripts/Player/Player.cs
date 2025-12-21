@@ -95,6 +95,7 @@ public class Player : Entity
         if (IFrameActive) return;
         currentHealth -= amount;
         OnPlayerHealthChanged?.Invoke(currentHealth, maxHealth);
+        SoundManager.Instance.PlaySound("walter_hit");
         if (currentHealth <= 0)
         {
             Die();
@@ -104,12 +105,14 @@ public class Player : Entity
     {
         DisablePlayer();
         m_animator.Play("death");
+        SoundManager.Instance.PlaySound("walter_death");
         GameManager.Instance.GameState = GameState.Gameover;
         OnPlayerDeath?.Invoke();
     }
     public void DoVictoryDance()
     {
         DisablePlayer();
+        SoundManager.Instance.PlaySound("yeah");
         m_animator.Play("dance");
     }
     public void EnablePlayer()
@@ -130,6 +133,9 @@ public class Player : Entity
         {
             case GameState.Gameplay:
                 EnablePlayer();
+                break;
+            case GameState.Win:
+                DoVictoryDance();
                 break;
             case GameState.MainMenu:
                 m_animator.Play("dance");
