@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BossBulletHellManager : MonoBehaviour
 {
-    [SerializeField] private List<List<BulletPatternAsset>> patterns;
+    [SerializeField] private List<BulletPhase> phases;
     [SerializeField] private List<BulletSpawner> bulletSpawners;
 
     private Dictionary<SpawnerId, BulletSpawner> spawnerLookup;
@@ -39,14 +39,14 @@ public class BossBulletHellManager : MonoBehaviour
     {
         DeactivateSpawners();
 
-        currentPatternIndex = (currentPatternIndex + 1) % patterns[currentPhaseIndex].Count;
+        currentPatternIndex = (currentPatternIndex + 1) % phases[currentPhaseIndex].BulletPatternAssets.Count;
         ActivatePattern(currentPatternIndex);
     }
 
     public void NextPhase()
     {
         currentPhaseIndex++;
-        if (currentPhaseIndex >= patterns.Count)
+        if (currentPhaseIndex >= phases.Count)
         {
             Debug.Log("Current Phase Index too high");
             return;
@@ -65,7 +65,7 @@ public class BossBulletHellManager : MonoBehaviour
 
     private void ActivatePattern(int index)
     {
-        BulletPatternAsset pattern = patterns[currentPhaseIndex][index];
+        BulletPatternAsset pattern = phases[currentPhaseIndex].BulletPatternAssets[index];
 
         foreach (BulletSpawnerConfig config in pattern.bulletSpawnerConfigs)
         {
