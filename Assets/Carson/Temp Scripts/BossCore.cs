@@ -21,6 +21,7 @@ public class BossCore : Entity
 
     public static event System.Action OnPhaseChange;
     public static event System.Action OnDeactivateBullets;
+    public static event System.Action OnBossDeactivateBullets;
     public static event System.Action OnBossRoar;
     public static event System.Action OnAttackChange;
     [SerializeField] Transform player;
@@ -144,7 +145,7 @@ public class BossCore : Entity
                         break;
                     case 3: 
                         animator.SetBool("Chase", true);
-                        OnDeactivateBullets?.Invoke();
+                        OnBossDeactivateBullets?.Invoke();
                         if(chaseCount < 1)
                             {
                                 newAttacks++;
@@ -209,10 +210,11 @@ public class BossCore : Entity
             Debug.Log("Back Hit");
         }
         
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !dead)
         {
             animator.SetTrigger("Death");
             dead = true;
+            GameManager.Instance.GameState = GameState.Win;
             //Die();
         }
     }

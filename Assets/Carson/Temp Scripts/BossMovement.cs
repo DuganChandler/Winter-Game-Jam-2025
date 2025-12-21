@@ -28,24 +28,19 @@ public class BossMovement : MonoBehaviour
     public void Teleport()
     {
         int teleportLocation = Random.Range(0, teleportPositions.Length);
-        //bossRb.position = teleportPositions[teleportLocation].position;
-        boss.transform.position = teleportPositions[teleportLocation].position;
-        Debug.Log("Teleporting to: " + teleportPositions[teleportLocation].position);
+        bossRb.position = teleportPositions[teleportLocation].position;
+        //boss.transform.position = teleportPositions[teleportLocation].position;
         bossRb.GetComponent<Animator>().ResetTrigger("Teleport");
-        Debug.Log("After teleport: " + bossRb.position);
         bossRb.GetComponent<Animator>().SetTrigger("Shoot");
         bossCore.TeleportShoot();
         
-        
     }
-    void LateUpdate()
-    {
-        Debug.Log("LateUpdate pos: " + transform.position);
-    }
+
 
     public void returnToCenter()
     {
         bossRb.position = centerPosition.position;
+        Debug.Log("Center");
         OnBossCenter?.Invoke();
         //bullet manager. next
     }
