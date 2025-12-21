@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,23 +8,35 @@ public class Player : Entity
     private PlayerAttack m_playerAttack;
     private PlayerInput m_playerInput;
     private SelfieStick m_selfieStick;
+    private Animator m_animator;
 
     // Events
     public static event System.Action OnActivateSelfieMode;
     public static event System.Action OnDeactivateSelfieMode;
+    public static event System.Action OnPlayerDeath;
+    public static event System.Action<float, float> OnPlayerHealthChanged;
 
     // Input Events
     private InputAction selfieAction;
+    public bool CanSelfie = true;
 
-    private void Awake()
+    protected new void Awake()
     {
+        base.Awake();
         m_playerMovement = GetComponent<PlayerMovement>();
         m_playerAttack = GetComponent<PlayerAttack>();
         m_playerInput = GetComponent<PlayerInput>();
         m_selfieStick = GetComponentInChildren<SelfieStick>();
+        m_animator = GetComponentInChildren<Animator>();
 
         // Input Actions
         selfieAction = m_playerInput.actions["Selfie"];
+    }
+
+    private void Start()
+    {
+        OnPlayerHealthChanged?.Invoke(currentHealth, maxHealth);
+        m_playerInput.actions.Enable();
     }
 
     private void OnEnable()
@@ -41,6 +54,7 @@ public class Player : Entity
     #region InputActions
     public void OnSelfie(InputAction.CallbackContext context)
     {
+        if (!CanSelfie) return;
         if (context.performed)
         {
             ActivateSelfieMode();
@@ -61,6 +75,7 @@ public class Player : Entity
         m_playerMovement.TopMoveSpeed = 2f;
         m_playerAttack.CanAttack = false;
         m_selfieStick.IsSelfieMode = true;
+        m_animator.SetFloat("selfie", 1);
     }
     private void DeactivateSelfieMode()
     {
@@ -69,6 +84,24 @@ public class Player : Entity
         m_playerMovement.DodgeEnabled = true;
         m_playerMovement.TopMoveSpeed = priorSpeed;
         m_playerAttack.CanAttack = true;
-        m_selfieStick.IsSelfieMode = false; 
+        m_selfieStick.IsSelfieMode = false;
+        m_animator.SetFloat("selfie", 0);
+    }
+    public override void Damage(float amount)
+    {
+        currentHealth -= amount;
+        OnPlayerHealthChanged?.Invoke(currentHealth, maxHealth);
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+    protected override void Die()
+    {
+        m_playerInput.actions.Disable();
+        m_playerMovement.enabled = false;
+        m_playerAttack.enabled = false;
+        m_animator.Play("death");
+        OnPlayerDeath?.Invoke();
     }
 }
