@@ -30,6 +30,7 @@ public class BossCore : Entity
     float currentChaseTime;
     [SerializeField] float maxChaseTime;    
     bool frozen;
+    public bool freezeFrame;
     public bool attacking = false;
     bool inFront;
     bool dead = false;
@@ -62,6 +63,7 @@ public class BossCore : Entity
         newShots = 0;
         chaseCount = 0;
         teleporCount = 0;
+        freezeFrame = false;
     }
 
     // Update is called once per frame
@@ -92,10 +94,10 @@ public class BossCore : Entity
         Vector3 toTarget = (player.position - transform.position).normalized;
     		
     	if (Vector3.Dot(toTarget, transform.forward) > 0) {
-    		Debug.Log("Target is in front of this game object.");
+    		//Debug.Log("Target is in front of this game object.");
             inFront = true;
     	} else {
-    		Debug.Log("Target is not in front of this game object.");
+    		//Debug.Log("Target is not in front of this game object.");
             inFront = false;
     	}
 
@@ -183,20 +185,20 @@ public class BossCore : Entity
     }
     public override void Damage(float amount)
     {
-        if(attacking)
+        if(freezeFrame)
+        {
+            currentHealth -= amount * 4;
+            Debug.Log("Freeze Hit");
+        }else if(attacking && inFront || animator.GetBool("Prone"))
         {
             currentHealth -= amount *3;
             Debug.Log("CRIT");
         }else if (!inFront)
         {
-            currentHealth -= amount *2;
+            currentHealth -= amount;
             Debug.Log("Back Hit");
         }
-        else
-        {
-            currentHealth -= amount;
-            Debug.Log("Hit");
-        }
+        
         if (currentHealth <= 0)
         {
             animator.SetTrigger("Death");
@@ -274,6 +276,7 @@ public class BossCore : Entity
         animator.speed = 0;
         OnDeactivateBullets?.Invoke();
         frozen = true;
+        freezeFrame = true;
         rb.constraints = RigidbodyConstraints.FreezeAll;
         // bullet manager deactivate
         // timer = 0 and pause
@@ -283,6 +286,7 @@ public class BossCore : Entity
 
         animator.speed = 1;
         //frozen = false;
+        freezeFrame = false;
     }
     void HandleMeterFull()
     {

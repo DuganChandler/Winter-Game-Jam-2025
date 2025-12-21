@@ -10,6 +10,7 @@ public class ProneAnim : StateMachineBehaviour
         bossCore = animator.GetComponent<BossCore>();
         bossCore.attacking = false;
         bossCore.SetFrozen(true);
+        bossCore.freezeFrame = false;
         
     }
 
