@@ -8,11 +8,14 @@ public class BossMovement : MonoBehaviour
     Transform player;
     public float speed = 2f;
     public static event System.Action OnBossCenter;
+    BossCore bossCore;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         bossRb = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        bossCore = GetComponent<BossCore>();
     }
 
     // Update is called once per frame
@@ -25,7 +28,11 @@ public class BossMovement : MonoBehaviour
     {
         int teleportLocation = Random.Range(0, teleportPositions.Length);
         bossRb.position = teleportPositions[teleportLocation].position;
+        bossRb.GetComponent<Animator>().ResetTrigger("Teleport");
         bossRb.GetComponent<Animator>().SetTrigger("Shoot");
+        bossCore.TeleportShoot();
+        
+        
     }
 
     public void returnToCenter()
@@ -33,5 +40,10 @@ public class BossMovement : MonoBehaviour
         bossRb.position = centerPosition.position;
         OnBossCenter?.Invoke();
         //bullet manager. next
+    }
+
+    void Shoot()
+    {
+        
     }
 }

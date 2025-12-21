@@ -1,10 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
-public class BossCore : MonoBehaviour
+public class BossCore : Entity
 {
-    [SerializeField] int maxHealth;
-    [SerializeField] int currentHealth;
+    /*[SerializeField] int maxHealth;
+    [SerializeField] int currentHealth;*/
     [SerializeField] int proneDamage;
     int proneThreshold;
 
@@ -22,12 +22,13 @@ public class BossCore : MonoBehaviour
     public static event System.Action OnDeactivateBullets;
     public static event System.Action OnBossRoar;
     public static event System.Action OnAttackChange;
-    Transform player;
+    [SerializeField] Transform player;
     Rigidbody rb;
-    Transform transform;
+    [SerializeField] Transform transform;
     int attackCount;
     float currentChaseTime;
     [SerializeField] float maxChaseTime;    
+    bool frozen;
 
     void OnEnable()
     {
@@ -41,11 +42,11 @@ public class BossCore : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        proneThreshold = maxHealth - proneDamage;
+        proneThreshold = (int)maxHealth - proneDamage;
         animator = GetComponent<Animator>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        //player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
-        transform = GetComponent<Transform>();
+        //transform = GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -53,16 +54,21 @@ public class BossCore : MonoBehaviour
     {
         if (currentHealth <= proneThreshold)
         {
+            Debug.Log("wow");
             StartCoroutine(Prone());
+            proneThreshold = (int)currentHealth - proneDamage;
 
         }
         if (currentHealth <= 0)
         {
             onDeath();
         }
-        Vector3 direction = player.transform.position - transform.position;
-        direction.y = 0f;
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction), 50 * Time.fixedDeltaTime);
+        if (!frozen)
+        {
+            Vector3 direction = player.transform.position - transform.position;
+            direction.y = 0f;
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction), 50 * Time.fixedDeltaTime);
+        }
 
         if (!animator.GetBool("Prone"))
         {
@@ -81,7 +87,7 @@ public class BossCore : MonoBehaviour
                         break;
                     case 2: 
                         animator.SetTrigger("Teleport");
-                        OnAttackChange?.Invoke();
+                        //OnAttackChange?.Invoke();
                         Debug.Log("teleport");
                         break;
                     case 3: 
@@ -167,19 +173,40 @@ public class BossCore : MonoBehaviour
     private IEnumerator Prone()
     {
         animator.SetBool("Prone",true);
+        animator.SetTrigger("ProneTrigger");
         OnDeactivateBullets?.Invoke();
         // bullet manager deactivate
         // timer = 0 and pause
+        currentChaseTime = 0;
+        frozen = true;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
         yield return new WaitForSeconds(10);
 
         animator.SetBool("Prone",false);
-        proneThreshold = currentHealth - proneDamage;
+        rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+
+        frozen = false;
         OnPhaseChange?.Invoke();
+    }
+    private IEnumerator Freeze()
+    {
+        animator.speed = 0;
+        OnDeactivateBullets?.Invoke();
+        frozen = true;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+        // bullet manager deactivate
+        // timer = 0 and pause
+        currentChaseTime = 0;
+        yield return new WaitForSeconds(10);
+        rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+
+        animator.speed = 1;
+        frozen = false;
     }
     void HandleMeterFull()
     {
         Debug.Log("Meter is full!");
-        StartCoroutine(Prone());
+        StartCoroutine(Freeze());
     }
     void onRoar()
     {
@@ -189,9 +216,9 @@ public class BossCore : MonoBehaviour
 
 
     //add timer
-    void Timer()
+    public void TeleportShoot()
     {
-        
+        OnAttackChange?.Invoke();
     }
 
 }

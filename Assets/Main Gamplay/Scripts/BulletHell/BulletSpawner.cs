@@ -167,6 +167,7 @@ public class BulletSpawner : MonoBehaviour {
         if (!targetManager.PlayerTarget) return;
 
         Vector3 direction = (targetManager.PlayerTarget.position - bulletSpawnerPivot.position).normalized;
+        direction.y = 0f;
         Quaternion lookRot = Quaternion.LookRotation(direction);
         bulletSpawnerPivot.rotation = lookRot;
     }

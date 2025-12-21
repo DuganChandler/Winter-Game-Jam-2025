@@ -19,7 +19,7 @@ MonoBehaviour:
     useBurst: 1
     fireDuration: 2
     pauseDuration: 0.5
-    rotationSpeed: 50
+    rotationSpeed: 0
     sineAmplitude: 0
     sineFrequency: 0
     bulletSpeed: 3
