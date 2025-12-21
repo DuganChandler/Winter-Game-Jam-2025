@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,13 +13,16 @@ public class Player : Entity
     // Events
     public static event System.Action OnActivateSelfieMode;
     public static event System.Action OnDeactivateSelfieMode;
+    public static event System.Action OnPlayerDeath;
+    public static event System.Action<float, float> OnPlayerHealthChanged;
 
     // Input Events
     private InputAction selfieAction;
     public bool CanSelfie = true;
 
-    private void Awake()
+    protected new void Awake()
     {
+        base.Awake();
         m_playerMovement = GetComponent<PlayerMovement>();
         m_playerAttack = GetComponent<PlayerAttack>();
         m_playerInput = GetComponent<PlayerInput>();
@@ -27,6 +31,12 @@ public class Player : Entity
 
         // Input Actions
         selfieAction = m_playerInput.actions["Selfie"];
+    }
+
+    private void Start()
+    {
+        OnPlayerHealthChanged?.Invoke(currentHealth, maxHealth);
+        m_playerInput.actions.Enable();
     }
 
     private void OnEnable()
@@ -76,5 +86,22 @@ public class Player : Entity
         m_playerAttack.CanAttack = true;
         m_selfieStick.IsSelfieMode = false;
         m_animator.SetFloat("selfie", 0);
+    }
+    public override void Damage(float amount)
+    {
+        currentHealth -= amount;
+        OnPlayerHealthChanged?.Invoke(currentHealth, maxHealth);
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+    protected override void Die()
+    {
+        m_playerInput.actions.Disable();
+        m_playerMovement.enabled = false;
+        m_playerAttack.enabled = false;
+        m_animator.Play("death");
+        OnPlayerDeath?.Invoke();
     }
 }
