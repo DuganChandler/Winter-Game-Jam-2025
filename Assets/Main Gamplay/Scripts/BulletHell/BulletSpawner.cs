@@ -1,7 +1,3 @@
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using JetBrains.Annotations;
-using NUnit.Framework;
 using UnityEngine;
 
 public enum BulletSpawnerType {
