@@ -875,6 +875,7 @@ MonoBehaviour:
   faces:
   - {fileID: 21300000, guid: 9c874358484296c41bf8d24d532a5d91, type: 3}
   - {fileID: 21300000, guid: 9d07702e10ff45d45b60dd2521568491, type: 3}
+  - {fileID: 21300000, guid: 9d07702e10ff45d45b60dd2521568491, type: 3}
 --- !u!1 &2945819493547899863
 GameObject:
   m_ObjectHideFlags: 0
@@ -3212,6 +3213,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SelfieStickUI
   m_meterFill: {fileID: 3368591912655879729}
+  m_cameraFill: {fileID: 0}
+  m_takenPhotoFill: {fileID: 0}
 --- !u!95 &6553313786257619782
 Animator:
   serializedVersion: 7

@@ -34,6 +34,7 @@ public class Player : Entity
         selfieAction = m_playerInput.actions["Selfie"];
 
         GameManager.Instance.OnGameStateChanged += OnGameStateChanged;
+        OnGameStateChanged(GameManager.Instance.GameState);
     }
 
     private void Start()
