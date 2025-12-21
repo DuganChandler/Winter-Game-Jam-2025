@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,26 +19,29 @@ public class PlayerAttack : MonoBehaviour
     private HitRegion m_hitRegion;
     private PlayerInput m_playerInput;
 
-    private float _attackTimer;
-    private float _attackCompletionTime;
     private InputAction attack;
+    private Animator m_animator;
+    private PlayerMovement m_playerMovement;
 
     [SerializeField] private bool _canAttack = true;
     public bool CanAttack
     {
         get 
         { 
-            return _canAttack && Time.time >= _attackCompletionTime; 
+            return _canAttack; 
         }
         set
         {
             _canAttack = value;
         }
     }
+    private bool _isAttacking;
 
     private void Awake()
     {
         m_playerInput = GetComponent<PlayerInput>();
+        m_animator = GetComponentInChildren<Animator>();
+        m_playerMovement = GetComponent<PlayerMovement>();
 
         // Input Actions
         attack = m_playerInput.actions["Attack"];
@@ -50,22 +54,31 @@ public class PlayerAttack : MonoBehaviour
     {
         attack.performed -= OnAttack;
     }   
-    private void Update()
-    {
-        if (Time.time >= _attackTimer)
-        {
-            m_hitRegion.gameObject.SetActive(false);
-        }
-    }
     public void OnAttack(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
             if (!CanAttack) return;
-            _attackTimer = Time.time + m_attackDuration;
-            _attackCompletionTime = Time.time + m_attackDuration + m_attackCooldown;
+            CanAttack = false;
+            m_playerMovement.CanMove = false;
+            m_playerMovement.CanDodge = false;
             m_hitRegion.DamageAmount = m_attackDamage;
+            m_animator.Play("slash");
             m_hitRegion.gameObject.SetActive(true);
+            _isAttacking = true;
+            StartCoroutine(OnAttackEnd());
         }
+    }
+
+    private IEnumerator OnAttackEnd()
+    {
+        yield return new WaitUntil(() => m_animator.GetCurrentAnimatorStateInfo(0).IsName("slash"));
+        yield return new WaitUntil(() => m_animator.GetCurrentAnimatorStateInfo(0).IsName("idle"));
+        yield return new WaitForSeconds(m_attackCooldown);
+        m_hitRegion.gameObject.SetActive(false);
+        m_playerMovement.CanMove = true;
+        m_playerMovement.CanDodge = true;
+        CanAttack = true;
+        _isAttacking = false;
     }
 }

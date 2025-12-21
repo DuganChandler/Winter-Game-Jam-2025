@@ -7,6 +7,7 @@ public class Player : Entity
     private PlayerAttack m_playerAttack;
     private PlayerInput m_playerInput;
     private SelfieStick m_selfieStick;
+    private Animator m_animator;
 
     // Events
     public static event System.Action OnActivateSelfieMode;
@@ -21,6 +22,7 @@ public class Player : Entity
         m_playerAttack = GetComponent<PlayerAttack>();
         m_playerInput = GetComponent<PlayerInput>();
         m_selfieStick = GetComponentInChildren<SelfieStick>();
+        m_animator = GetComponentInChildren<Animator>();
 
         // Input Actions
         selfieAction = m_playerInput.actions["Selfie"];
@@ -61,6 +63,7 @@ public class Player : Entity
         m_playerMovement.TopMoveSpeed = 2f;
         m_playerAttack.CanAttack = false;
         m_selfieStick.IsSelfieMode = true;
+        m_animator.SetFloat("selfie", 1);
     }
     private void DeactivateSelfieMode()
     {
@@ -69,6 +72,7 @@ public class Player : Entity
         m_playerMovement.DodgeEnabled = true;
         m_playerMovement.TopMoveSpeed = priorSpeed;
         m_playerAttack.CanAttack = true;
-        m_selfieStick.IsSelfieMode = false; 
+        m_selfieStick.IsSelfieMode = false;
+        m_animator.SetFloat("selfie", 0);
     }
 }
