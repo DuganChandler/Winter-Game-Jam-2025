@@ -46,6 +46,7 @@ public class BossCore : Entity
     [SerializeField] BossBulletHellManager bossBulletHellManager;
     bool phaseChanging;
     bool startTriggered;
+    KrampusBehavior bossBehavior;
 
     void OnEnable()
     {
@@ -69,6 +70,7 @@ public class BossCore : Entity
         chaseCount = 0;
         teleporCount = 0;
         freezeFrame = false;
+        bossBehavior = GetComponent<KrampusBehavior>();
     }
 
     // Update is called once per frame
@@ -85,20 +87,23 @@ public class BossCore : Entity
         }
         if (!dead)
         {
-            if(newAttacks >= uniqueAttacks)
+            // this is  why he keeps changing phases without the prone. (GONNA COMMENT IT OUT FOR NOW)
+            /*if(newAttacks >= uniqueAttacks)
             {
                 phaseChanging = true;
                 animator.SetTrigger("Center");
                 Debug.Log("Change Phase");
-            }
+            }*/
+        
         if (!frozen)
         {
+            // rotate boss towards player
             Vector3 direction = player.transform.position - transform.position;
             direction.y = 0f;
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction), 50 * Time.fixedDeltaTime); 
         }
-        Vector3 toTarget = (player.position - transform.position).normalized;
-    		
+        // check if player is in front of boss
+        Vector3 toTarget = (player.position - transform.position).normalized;	
     	if (Vector3.Dot(toTarget, transform.forward) > 0) {
     		//Debug.Log("Target is in front of this game object.");
             inFront = true;
@@ -124,6 +129,8 @@ public class BossCore : Entity
                 {
                     case 1: 
                         animator.SetTrigger("Shoot");
+                        bossBehavior.prevState = bossBehavior.currentState;
+                        bossBehavior. currentState = KrampusBehavior.EnemyState.shooting;
                         OnAttackChange?.Invoke();
                         frozen = true;
                         attacking = true;
@@ -137,6 +144,8 @@ public class BossCore : Entity
                         break;
                     case 2: 
                         animator.SetTrigger("Teleport");
+                        bossBehavior.prevState = bossBehavior.currentState;
+                        bossBehavior. currentState = KrampusBehavior.EnemyState.teleporting;
                         //OnAttackChange?.Invoke();
                         
                         if(teleporCount <= 2)
@@ -148,6 +157,8 @@ public class BossCore : Entity
                         break;
                     case 3: 
                         animator.SetBool("Chase", true);
+                        bossBehavior.prevState = bossBehavior.currentState;
+                        bossBehavior. currentState = KrampusBehavior.EnemyState.chasing;
                         OnBossDeactivateBullets?.Invoke();
                         if(chaseCount < 1)
                             {
@@ -172,29 +183,6 @@ public class BossCore : Entity
         
     }
 
-        
-        /*int attackChoice = Random.Range(5,0);
-        //Debug.Log(attackChoice);
-        switch (attackChoice)
-        {
-            case 1: 
-                animator.SetBool("Chase", true);
-                break;
-            case 2: 
-                animator.SetTrigger("Teleport");
-                break;
-            /*case 3: 
-                animator.SetTrigger("Line");
-                break;
-            case 4: 
-                animator.SetTrigger("Cone");
-                break;
-            case 5: 
-                animator.SetTrigger("Cardinal");
-                break;
-            default:
-                break;
-        }*/
 
     }
     public override void Damage(float amount)
